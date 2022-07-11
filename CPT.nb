@@ -1,0 +1,5408 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    192134,       5400]
+NotebookOptionsPosition[    184394,       5264]
+NotebookOutlinePosition[    185022,       5285]
+CellTagsIndexPosition[    184979,       5282]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["Cosmological Perturbation Theory",
+ FontWeight->"Bold"]], "Title",
+ CellChangeTimes->{{3.624254324260852*^9, 3.6242543326495028`*^9}, {
+  3.624257146682208*^9, 3.624257157170541*^9}, {3.624257195583683*^9, 
+  3.6242571963017673`*^9}},
+ FontWeight->"Regular",
+ FontColor->GrayLevel[1],
+ Background->RGBColor[
+  0.8324254215304799, 0.33357747768368046`, 
+   0.06163118944075685],ExpressionUUID->"4f1253ae-0246-4172-adea-\
+3298817d7d2f"],
+
+Cell[TextData[StyleBox["Daniel Baumann",
+ FontWeight->"Regular",
+ FontColor->GrayLevel[1]]], "Subtitle",
+ CellChangeTimes->{{3.624254356882504*^9, 3.6242543707628202`*^9}, {
+   3.820024689262238*^9, 3.8200247051034927`*^9}, {3.820300478811256*^9, 
+   3.82030047909511*^9}, 3.86328192695643*^9},
+ FontSize->18,
+ Background->RGBColor[
+  0.7016861219195849, 0.21701380941481652`, 
+   0.07266346227206837],ExpressionUUID->"53056adb-41a3-4bb1-9471-\
+a2f77193d5b6"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Acknowledgements", "Abstract",
+ FontColor->RGBColor[
+  0.7016861219195849, 0.21701380941481652`, 0.07266346227206837]]], "Section",\
+
+ CellChangeTimes->{{3.863281593598372*^9, 
+  3.8632816028342752`*^9}},ExpressionUUID->"de3320f2-6da4-4406-8983-\
+3e846aee03a3"],
+
+Cell["\<\
+This notebook is largely based on an earlier notebook written by Prof . Yi \
+Wang (Hong Kong University) .  \[LineSeparator]It also uses elements of \
+notebooks provided by Prof . James Hartle (UC Santa Barbara) .\
+\>", "Text",
+ CellChangeTimes->{{3.863281868301022*^9, 3.8632819243548937`*^9}, {
+  3.8632823671814003`*^9, 3.863282367291877*^9}},
+ FontSize->14,ExpressionUUID->"b4883caf-5aad-4a10-b3c7-1fd20f1993a1"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Definitions", "Section",
+ CellChangeTimes->{{3.624183161442725*^9, 3.6241831701526833`*^9}, {
+  3.624184481794589*^9, 3.624184483647655*^9}, {3.624254457295484*^9, 
+  3.6242544602794657`*^9}},
+ FontSize->24,
+ FontWeight->"Regular",
+ FontColor->RGBColor[
+  0.7016861219195849, 0.21701380941481652`, 
+   0.07266346227206837],ExpressionUUID->"556e68db-10ab-4eb2-b6f2-\
+8ee48e438518"],
+
+Cell[CellGroupData[{
+
+Cell["Input", "Subsection",
+ CellChangeTimes->{{3.62425449502711*^9, 3.6242545098435583`*^9}, {
+  3.624255326919179*^9, 
+  3.624255328302948*^9}},ExpressionUUID->"6e421091-7c11-4bf4-8abe-\
+d41931f310c2"],
+
+Cell[TextData[{
+ StyleBox["Define the coordinates.",
+  FontWeight->"Bold"],
+ " Note that in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", array indices start from 1 (instead of 0). \nWe therefore use 1, 2, 3 for \
+the spatial coordinates, and 4 for the time coordinate."
+}], "Text",
+ CellChangeTimes->{{3.6241834160397882`*^9, 3.6241834717251577`*^9}, {
+   3.624254534195643*^9, 3.624254540611639*^9}, {3.62425458021667*^9, 
+   3.624254594488703*^9}, {3.863280498639655*^9, 3.863280531508842*^9}, 
+   3.863282760027433*^9},ExpressionUUID->"ecc31d12-a612-416b-ba2a-\
+8b932ae765ed"],
+
+Cell[BoxData[{
+ StyleBox[
+  RowBox[{
+   RowBox[{"n", "=", "4"}], ";"}],
+  FontWeight->"Bold"], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"coord", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "}"}]}], ";"}],
+  FontWeight->"Bold"]}], "Input",
+ CellChangeTimes->{{3.624183152101707*^9, 3.624183156098761*^9}, {
+   3.624183832113909*^9, 3.624183838897757*^9}, {3.624184118425181*^9, 
+   3.6241841465328207`*^9}, 3.8632804867968082`*^9},
+ CellLabel->"In[44]:=",ExpressionUUID->"8dccb880-754c-46a6-9450-4990aba1d2c5"],
+
+Cell[TextData[{
+ StyleBox["Define the metric. ",
+  FontWeight->"Bold"],
+ StyleBox["The perturbed metric in conformal Newtonian gauge is:",
+  FontWeight->"Regular"]
+}], "Text",
+ CellChangeTimes->{{3.624183478587899*^9, 3.624183551751009*^9}, {
+  3.6241837568547153`*^9, 3.624183808331625*^9}, {3.624185153266245*^9, 
+  3.624185169385601*^9}, {3.624185240913422*^9, 3.6241852564302197`*^9}, {
+  3.624254612729741*^9, 3.624254675693165*^9}, {3.8632827741268377`*^9, 
+  3.863282817582828*^9}},ExpressionUUID->"d819dd5f-36c8-4c03-9f01-\
+b617d2a9a57a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"metric", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"a", "[", "\[Eta]", "]"}], "2"], 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", 
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            RowBox[{"2", "\[Epsilon]", " ", 
+             RowBox[{"\[CapitalPhi]", "[", 
+              RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}], 
+           ")"}]}], ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", 
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            RowBox[{"2", "\[Epsilon]", " ", 
+             RowBox[{"\[CapitalPhi]", "[", 
+              RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}], 
+           ")"}]}], ",", "0", ",", "0"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", 
+         RowBox[{"-", 
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            RowBox[{"2", "\[Epsilon]", " ", 
+             RowBox[{"\[CapitalPhi]", "[", 
+              RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}], 
+           ")"}]}], ",", "0"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", " ", "0", " ", ",", "  ", "0", ",", "  ", 
+         RowBox[{"1", "+", 
+          RowBox[{"2", " ", "\[Epsilon]", " ", 
+           RowBox[{"\[CapitalPsi]", "[", 
+            RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}]}], 
+        "}"}]}], "}"}]}], " ", "+", " ", 
+    SuperscriptBox[
+     RowBox[{"O", "[", "\[Epsilon]", "]"}], "2"]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6241831781060047`*^9, 3.624183197556244*^9}, {
+  3.624183368924923*^9, 3.624183406185193*^9}, {3.6241835595058804`*^9, 
+  3.624183619525477*^9}, {3.6241836804177933`*^9, 3.624183737201412*^9}, {
+  3.6241841247326803`*^9, 3.624184131976643*^9}, {3.863280721734474*^9, 
+  3.8632807505924463`*^9}},
+ CellLabel->"In[46]:=",ExpressionUUID->"9ae33185-af3d-4360-baa0-0d2919f14ad0"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+   "We", " ", "have", " ", "multiplied", " ", "the", " ", "perturbations", 
+    " ", "by", " ", "a", " ", "factor", " ", "of", " ", "\[Epsilon]"}], ",", 
+   " ", 
+   RowBox[{
+   "so", " ", "that", " ", "we", " ", "can", " ", "keep", " ", "track", " ", 
+    "of", " ", "order", " ", "of", " ", "the", " ", "perturbations", " ", 
+    "in", " ", "later", " ", 
+    RowBox[{"expressions", ".", "\n", "Here"}], " ", "we", " ", "are", " ", 
+    "only", " ", "interested", " ", "in", " ", "perturbations", " ", "up", 
+    " ", "to", " ", "linear", " ", "order", " ", "in", " ", 
+    RowBox[{"\[Epsilon]", ".", " "}]}]}],
+  FontSize->14]], "Text",
+ CellChangeTimes->{{3.62425469843054*^9, 3.624254713734083*^9}, {
+  3.624254757253483*^9, 3.6242549225062523`*^9}},
+ FontFamily->"Arial",ExpressionUUID->"7b239b6e-d962-460b-baaa-aa0be07d3603"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output", "Subsection",
+ CellChangeTimes->{{3.6241876634868193`*^9, 3.624187672869998*^9}, 
+   3.624254951302895*^9},ExpressionUUID->"b65936af-d7d6-4ee0-90fe-\
+58cbad6fad9d"],
+
+Cell["The following just helps us to clean up our results.", "Text",
+ CellChangeTimes->{{3.6242550186886797`*^9, 
+  3.624255046026684*^9}},ExpressionUUID->"a1b70278-7d84-46a7-9f11-\
+68720f462043"],
+
+Cell["We introduce the Hubble parameter and the density contrast:", "Text",
+ CellChangeTimes->{{3.6241844936949663`*^9, 3.624184520042466*^9}, 
+   3.624184574752191*^9, {3.624255059799528*^9, 3.624255071975787*^9}, {
+   3.863280855076427*^9, 
+   3.8632808924086237`*^9}},ExpressionUUID->"b5e7a067-e067-4a24-954a-\
+c804892fdff8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"simp", "[", "expr_", "]"}], " ", ":=", " ", 
+   RowBox[{"Collect", "[", 
+    RowBox[{
+     RowBox[{"expr", "/.", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"a", "'"}], "[", "\[Eta]", "]"}], "\[Rule]", 
+         RowBox[{
+          RowBox[{"\[ScriptCapitalH]", "[", "\[Eta]", "]"}], " ", 
+          RowBox[{"a", "[", "\[Eta]", "]"}]}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"\[Delta]\[Rho]", "[", 
+          RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}], "\[Rule]", 
+         
+         RowBox[{
+          RowBox[{"\[Rho]0", "[", "\[Eta]", "]"}], " ", 
+          RowBox[{"\[Delta]", "[", 
+           RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}]}], 
+       "\[IndentingNewLine]", "}"}]}], ",", "\[Epsilon]", ",", "Simplify"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.624184488541153*^9, 3.62418448971847*^9}, {
+  3.624184521880518*^9, 3.6241845879858418`*^9}, {3.6241846482071333`*^9, 
+  3.6241846566527576`*^9}, {3.624187455696248*^9, 3.6241874805188704`*^9}, {
+  3.624189181976914*^9, 3.624189182245262*^9}, {3.863280801455326*^9, 
+  3.863280828791049*^9}},
+ CellLabel->"In[47]:=",ExpressionUUID->"a4cbbcaa-9490-411e-a8aa-0ecf1803d8ed"],
+
+Cell[TextData[{
+ "We shall have a lot of functions of x,y,z,\[Eta], which can be very hard to \
+read. To improve the situation, we will use ",
+ StyleBox["red",
+  FontColor->RGBColor[1., 0., 0.]],
+ " to denote functions of spacetime, and ",
+ StyleBox["purple",
+  FontColor->RGBColor[0.5000076295109483, 0., 0.5000076295109483]],
+ " to denote functions of time only. For example:\n\na[\[Eta]] \[Rule] ",
+ StyleBox["a",
+  FontColor->RGBColor[0.5000076295109483, 0., 0.5000076295109483]],
+ "\n\[CapitalPhi][x,y,z,\[Eta]] \[Rule] ",
+ StyleBox["\[CapitalPhi]",
+  FontColor->RGBColor[1., 0., 0.]],
+ StyleBox["\n",
+  FontColor->RGBColor[1, 0, 0]],
+ StyleBox["\nAlso, derivatives are written into an easier to read form. For \
+example: \n\n",
+  FontColor->GrayLevel[0]],
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[CapitalPhi]", 
+    RowBox[{"(", 
+     RowBox[{"0", ",", "0", ",", "0", ",", "1"}], ")"}]], TraditionalForm]],
+  ExpressionUUID->"359dfb10-bd02-4576-b05e-c15db13863f9"],
+ "[x,y,z,\[Eta]] \[Rule] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[PartialD]", "\[Eta]"], TraditionalForm]],ExpressionUUID->
+  "2d205c57-d05f-428d-935a-b1934ef875e9"],
+ StyleBox["\[CapitalPhi]\n\n",
+  FontColor->RGBColor[1, 0, 0]],
+ StyleBox["For derivatives on multiple variables, we use a slightly \
+non-standard notation. For example:",
+  FontColor->GrayLevel[0]],
+ StyleBox["\n\n",
+  FontColor->RGBColor[1, 0, 0]],
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[CapitalPhi]", 
+    RowBox[{"(", 
+     RowBox[{"0", ",", "0", ",", "1", ",", "1"}], ")"}]], TraditionalForm]],
+  ExpressionUUID->"b05d4aa1-9583-4fdf-a452-144b1a98c19d"],
+ "[x,y,z,\[Eta]] \[Rule] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[PartialD]", "z\[Eta]"], TraditionalForm]],ExpressionUUID->
+  "72aedc4b-5736-444c-9ebd-a23d27c9df1e"],
+ StyleBox["\[CapitalPhi]\n",
+  FontColor->RGBColor[1, 0, 0]],
+ StyleBox["\nIf you don\[CloseCurlyQuote]t like the above shorthands, just \
+comment out the code block below.",
+  FontColor->GrayLevel[0]]
+}], "Text",
+ CellChangeTimes->{{3.6241876777875834`*^9, 3.624187732859186*^9}, {
+   3.624187791146276*^9, 3.6241879417361803`*^9}, {3.624188141482633*^9, 
+   3.624188161276623*^9}, {3.6241883619529257`*^9, 3.6241883927238693`*^9}, {
+   3.624188664973482*^9, 3.624188730030642*^9}, {3.624189502367125*^9, 
+   3.624189502606163*^9}, {3.624255102620693*^9, 3.62425510450069*^9}, {
+   3.6242551762176533`*^9, 3.624255187544279*^9}, {3.6242552277043962`*^9, 
+   3.624255241488204*^9}, {3.624255283037219*^9, 3.624255306885969*^9}, {
+   3.863280902490857*^9, 3.863280930535344*^9}, {3.863280981447117*^9, 
+   3.8632809819927464`*^9}, {3.8632810349090567`*^9, 3.863281081525631*^9}, 
+   3.8632811173345613`*^9},ExpressionUUID->"b238bce8-f2a0-4149-9d6a-\
+24d411aac499"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"make", " ", "derivatives", " ", "shorter"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"PdBox", "[", "lst_", "]"}], ":=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"StyleBox", "[", 
+          RowBox[{"#", ",", " ", 
+           RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}], "&"}], "@", " ", 
+        RowBox[{"GridBox", "[", 
+         RowBox[{"#", ",", " ", 
+          RowBox[{"Selectable", "\[Rule]", "True"}], ",", " ", 
+          RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", " ", 
+          RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}]}], "&"}], "@", " ", 
+      RowBox[{"Transpose", "@", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Transpose", "[", 
+           RowBox[{"Map", "[", 
+            RowBox[{"ToBoxes", ",", "lst", ",", 
+             RowBox[{"{", "2", "}"}]}], "]"}], "]"}], "/.", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"\"\<1\>\"", ",", "dn_"}], "}"}], "\[RuleDelayed]", 
+           RowBox[{"{", 
+            RowBox[{"\"\<\>\"", ",", "dn"}], "}"}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<0\>\"", ",", "_"}], "}"}]}], "]"}]}]}]}], ";"}], "\n", 
+   
+   RowBox[{
+    RowBox[{"MakeBoxes", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Derivative", "[", "d__", "]"}], "[", "f_", "]"}], "[", "x__",
+        "]"}], ",", "StandardForm"}], "]"}], ":=", " ", 
+    RowBox[{
+     RowBox[{"TagBox", "[", 
+      RowBox[{
+       RowBox[{"RowBox", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"GridBox", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"{", 
+              RowBox[{"\"\<\[PartialD]\>\"", ",", " ", 
+               RowBox[{"PdBox", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", "d", "}"}], ",", 
+                  RowBox[{"{", "x", "}"}]}], "}"}], "]"}], ",", "\n", "\t", 
+               RowBox[{"GridBox", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"{", 
+                   RowBox[{"ToBoxes", "@", 
+                    RowBox[{"f", "@", "x"}]}], "}"}], "}"}], ",", " ", 
+                 RowBox[{"Selectable", "\[Rule]", "True"}]}], "]"}]}], "}"}], 
+             "}"}], ",", " ", 
+            RowBox[{"ColumnSpacings", "\[Rule]", "0"}], ",", " ", 
+            RowBox[{"RowSpacings", "\[Rule]", "0"}]}], "]"}], ",", 
+          "\"\<\>\""}], "}"}], "]"}], ",", "\"\<GRED\>\"", ",", " ", 
+       RowBox[{"Selectable", "\[Rule]", "False"}]}], "]"}], " ", "/;", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Length", "[", 
+        RowBox[{"{", "x", "}"}], "]"}], ">", "1"}], " ", "&&", " ", 
+      RowBox[{
+       RowBox[{"VectorQ", "[", 
+        RowBox[{
+         RowBox[{"{", "d", "}"}], ",", " ", "NumberQ"}], "]"}], " ", "\\\n"}],
+       "\t\t", "&&", " ", 
+      RowBox[{
+       RowBox[{"VectorQ", "[", 
+        RowBox[{
+         RowBox[{"{", "x", "}"}], ",", " ", "AtomQ"}], "]"}], " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{"to", " ", "avoid", " ", "formatting", " ", 
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"f", "[", 
+            RowBox[{
+             RowBox[{"x", "+", "y"}], ",", 
+             RowBox[{"z", "+", "w"}]}], "]"}], ",", " ", "x"}], "]"}]}], " ", 
+        "*)"}], " ", "\\\n"}], "\t\t", "&&", " ", 
+      RowBox[{
+       RowBox[{"Length", "@", 
+        RowBox[{"DeleteDuplicates", "@", 
+         RowBox[{"{", "x", "}"}]}]}], "===", 
+       RowBox[{"Length", "@", 
+        RowBox[{"{", "x", "}"}]}]}]}]}]}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"to", " ", "avoid", " ", "formatting", " ", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"f", "[", 
+        RowBox[{"x", ",", " ", "x"}], "]"}], ",", " ", "x"}], "]"}]}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MakeExpression", "[", 
+      RowBox[{
+       RowBox[{"TagBox", "[", 
+        RowBox[{
+         RowBox[{"GridBox", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"{", 
+             RowBox[{"\"\<\[PartialD]\>\"", ",", " ", 
+              RowBox[{"StyleBox", "[", 
+               RowBox[{
+                RowBox[{"GridBox", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"n__", ",", "x__"}], "}"}], ",", "___"}], "]"}], 
+                ",", "___"}], "]"}], ",", " ", 
+              RowBox[{"GridBox", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"{", "f_", "}"}], "}"}], ",", "___"}], "]"}]}], 
+             "}"}], "}"}], ",", " ", "___"}], "]"}], ",", "\"\<GRED\>\"", ",",
+          " ", "___"}], "]"}], ",", " ", "StandardForm"}], "]"}], ":=", " ", 
+     "\n", "\t", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"h", "=", 
+          RowBox[{"ToExpression", "@", "f"}]}], ",", 
+         RowBox[{"ids", "=", 
+          RowBox[{"Sequence", "@@", 
+           RowBox[{"Transpose", "@", 
+            RowBox[{"Map", "[", 
+             RowBox[{"ToExpression", ",", 
+              RowBox[{"{", 
+               RowBox[{"x", ",", 
+                RowBox[{"n", "/.", 
+                 RowBox[{
+                  TagBox[
+                   StyleBox["\"\<\>\"",
+                    ShowSpecialCharacters->False,
+                    ShowStringCharacters->True,
+                    NumberMarks->True],
+                   FullForm], "\[Rule]", "\"\<1\>\""}]}]}], "}"}], ",", 
+              RowBox[{"{", "2", "}"}]}], "]"}]}]}]}]}], "}"}], ",", 
+       RowBox[{"HoldComplete", "[", 
+        RowBox[{"D", "[", 
+         RowBox[{"h", ",", "ids"}], "]"}], "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"make", " ", "functions", " ", "shorter"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"fx", "=", 
+        RowBox[{"f_", "@@", "coord"}]}], "}"}], ",", " ", 
+      RowBox[{
+       RowBox[{"MakeBoxes", "[", 
+        RowBox[{"fx", ",", " ", "StandardForm"}], "]"}], ":=", " ", 
+       RowBox[{"TagBox", "[", 
+        RowBox[{
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"ToBoxes", "[", "f", "]"}], ",", "Red"}], "]"}], ",", 
+         "\"\<GREFX\>\"", ",", 
+         RowBox[{"Selectable", "\[Rule]", "False"}]}], "]"}]}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MakeExpression", "[", 
+      RowBox[{
+       RowBox[{"TagBox", "[", 
+        RowBox[{"f_", ",", "\"\<GREFX\>\"", ",", "___"}], "]"}], ",", 
+       "StandardForm"}], "]"}], ":=", " ", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"fx", "=", 
+         RowBox[{
+          RowBox[{"ToExpression", "[", "f", "]"}], "@@", "coord"}]}], "}"}], 
+       ",", 
+       RowBox[{"HoldComplete", "@", "fx"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"fx", "=", 
+        RowBox[{"f_", "[", 
+         RowBox[{"coord", "\[LeftDoubleBracket]", 
+          RowBox[{"-", "1"}], "\[RightDoubleBracket]"}], "]"}]}], "}"}], ",", 
+      " ", 
+      RowBox[{
+       RowBox[{"MakeBoxes", "[", 
+        RowBox[{"fx", ",", " ", "StandardForm"}], "]"}], ":=", " ", 
+       RowBox[{"TagBox", "[", 
+        RowBox[{
+         RowBox[{"StyleBox", "[", 
+          RowBox[{
+           RowBox[{"ToBoxes", "[", "f", "]"}], ",", "Purple"}], "]"}], ",", 
+         "\"\<GREFX0\>\"", ",", 
+         RowBox[{"Selectable", "\[Rule]", "False"}]}], "]"}]}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MakeExpression", "[", 
+      RowBox[{
+       RowBox[{"TagBox", "[", 
+        RowBox[{"f_", ",", "\"\<GREFX0\>\"", ",", "___"}], "]"}], ",", 
+       "StandardForm"}], "]"}], ":=", " ", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"fx", "=", 
+         RowBox[{
+          RowBox[{"ToExpression", "[", "f", "]"}], "[", 
+          RowBox[{"coord", "\[LeftDoubleBracket]", 
+           RowBox[{"-", "1"}], "\[RightDoubleBracket]"}], "]"}]}], "}"}], ",", 
+       RowBox[{"HoldComplete", "@", "fx"}]}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.618305243339406*^9, 3.61830532119669*^9}, {
+  3.61830536559153*^9, 3.6183053998158503`*^9}, {3.6183054630370197`*^9, 
+  3.6183054714272537`*^9}, {3.618305527726241*^9, 3.618305585225298*^9}, {
+  3.618305622517457*^9, 3.618305638984992*^9}, {3.618305727741514*^9, 
+  3.618305839353763*^9}, {3.6183060390117407`*^9, 3.618306040614747*^9}, {
+  3.618306165440967*^9, 3.618306166012268*^9}, {3.61857288458365*^9, 
+  3.618572890186783*^9}, {3.618573015951345*^9, 3.618573082404079*^9}, {
+  3.618573203255933*^9, 3.618573203914966*^9}, {3.618573311089671*^9, 
+  3.618573329690096*^9}, {3.618573408171764*^9, 3.618573423943501*^9}, {
+  3.624187955108158*^9, 3.62418803884822*^9}, {3.624188079853321*^9, 
+  3.624188116724566*^9}, {3.624188163747078*^9, 3.624188182560295*^9}, {
+  3.624188319722612*^9, 3.624188354231646*^9}, {3.624188732857993*^9, 
+  3.6241887509205647`*^9}},
+ CellLabel->"In[48]:=",ExpressionUUID->"b9c061ff-a77f-4777-be70-9c69f16a89ab"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Curvature tensor", "Section",
+ CellChangeTimes->{{3.6241829895630627`*^9, 3.624182998370222*^9}, {
+   3.624184802909148*^9, 3.624184805627514*^9}, 3.6242544467783527`*^9, 
+   3.624257064634074*^9},
+ FontSize->24,ExpressionUUID->"8ba9beda-f7dd-46c3-bfc1-c9d24084ee31"],
+
+Cell[TextData[{
+ "From the metric (given in the form of a 4\[Times]4 matrix), we shall \
+calculate\n\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox[
+     SuperscriptBox["\[CapitalGamma]", "\[Lambda]"], "\[Mu]\[Nu]"], "=", 
+    RowBox[{
+     FractionBox["1", "2"], 
+     RowBox[{
+      SuperscriptBox["g", "\[Lambda]\[Sigma]"], "(", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["\[PartialD]", "\[Mu]"], " ", 
+        SubscriptBox["g", "\[Sigma]\[Nu]"]}], "+", 
+       RowBox[{
+        SubscriptBox["\[PartialD]", "\[Nu]"], " ", 
+        SubscriptBox["g", "\[Sigma]\[Mu]"]}], "-", 
+       RowBox[{
+        SubscriptBox["\[PartialD]", "\[Sigma]"], " ", 
+        SubscriptBox["g", "\[Mu]\[Nu]"]}]}], ")"}]}]}], TraditionalForm]],
+  ExpressionUUID->"1d9e170e-ee62-40b1-9894-e919f33d0320"],
+ ",\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox[
+     SuperscriptBox["R", "\[Lambda]"], "\[Mu]\[Nu]\[Sigma]"], "=", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["\[PartialD]", "\[Nu]"], " ", 
+      SubscriptBox[
+       SuperscriptBox["\[CapitalGamma]", "\[Lambda]"], "\[Mu]\[Sigma]"]}], 
+     "-", 
+     RowBox[{
+      SubscriptBox["\[PartialD]", "\[Sigma]"], " ", 
+      SubscriptBox[
+       SuperscriptBox["\[CapitalGamma]", "\[Lambda]"], "\[Mu]\[Nu]"]}], "+", 
+     RowBox[{
+      SubscriptBox[
+       SuperscriptBox["\[CapitalGamma]", "\[Eta]"], "\[Mu]\[Sigma]"], 
+      SubscriptBox[
+       SuperscriptBox["\[CapitalGamma]", "\[Lambda]"], "\[Eta]\[Nu]"]}], "-", 
+     
+     RowBox[{
+      SubscriptBox[
+       SuperscriptBox["\[CapitalGamma]", "\[Eta]"], "\[Mu]\[Nu]"], 
+      SubscriptBox[
+       SuperscriptBox["\[CapitalGamma]", "\[Lambda]"], 
+       "\[Eta]\[Sigma]"]}]}]}], TraditionalForm]],ExpressionUUID->
+  "bc115910-e35b-4d61-be4a-79f62d705476"],
+ ",\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["R", "\[Mu]\[Nu]"], "=", 
+    SubscriptBox[
+     SuperscriptBox["R", "\[Lambda]"], "\[Mu]\[Lambda]\[Nu]"]}], 
+   TraditionalForm]],ExpressionUUID->"65e223f7-3829-4e41-ac20-8183229aaef0"],
+ ",\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"R", "=", 
+    RowBox[{
+     SuperscriptBox["g", "\[Mu]\[Nu]"], 
+     SubscriptBox["R", "\[Mu]\[Nu]"]}]}], TraditionalForm]],ExpressionUUID->
+  "a51e7263-d7eb-4bb9-bd64-dba0b212387d"],
+ ",\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["G", "\[Mu]\[Nu]"], "=", 
+    RowBox[{
+     SubscriptBox["R", "\[Mu]\[Nu]"], "-", 
+     RowBox[{
+      FractionBox["1", "2"], 
+      SubscriptBox["g", "\[Mu]\[Nu]"], "R"}]}]}], TraditionalForm]],
+  ExpressionUUID->"c68fa349-f029-4a40-9a21-e168f8e338ee"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.6241830014689627`*^9, 3.624183095395879*^9}, {
+   3.624183125974523*^9, 3.624183142317745*^9}, {3.820531849208879*^9, 
+   3.820531868929287*^9}, {3.820545055169354*^9, 3.820545056828781*^9}, 
+   3.8632812132727547`*^9},ExpressionUUID->"e90cba05-97ca-4e80-bda2-\
+a3051bdc3560"],
+
+Cell[CellGroupData[{
+
+Cell["Computation", "Subsection",
+ CellChangeTimes->{{3.624183945847652*^9, 3.624183948044056*^9}, {
+  3.624255376560157*^9, 
+  3.624255379200066*^9}},ExpressionUUID->"99194f23-d0f5-402a-9c15-\
+7156c3788c4e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"inversemetric", "=", 
+    RowBox[{"simp", "[", 
+     RowBox[{"Inverse", "[", "metric", "]"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"affine", ":=", 
+    RowBox[{"affine", "=", 
+     RowBox[{"simp", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "/", "2"}], ")"}], "*", 
+         RowBox[{"Sum", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"inversemetric", "\[LeftDoubleBracket]", 
+              RowBox[{"i", ",", "s"}], "\[RightDoubleBracket]"}], ")"}], "*", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"D", "[", 
+               RowBox[{
+                RowBox[{"metric", "\[LeftDoubleBracket]", 
+                 RowBox[{"s", ",", "j"}], "\[RightDoubleBracket]"}], ",", 
+                RowBox[{
+                "coord", "\[LeftDoubleBracket]", "k", 
+                 "\[RightDoubleBracket]"}]}], " ", "]"}], "+", 
+              RowBox[{"D", "[", 
+               RowBox[{
+                RowBox[{"metric", "\[LeftDoubleBracket]", 
+                 RowBox[{"s", ",", "k"}], "\[RightDoubleBracket]"}], ",", 
+                RowBox[{
+                "coord", "\[LeftDoubleBracket]", "j", 
+                 "\[RightDoubleBracket]"}]}], " ", "]"}], "-", 
+              RowBox[{"D", "[", 
+               RowBox[{
+                RowBox[{"metric", "\[LeftDoubleBracket]", 
+                 RowBox[{"j", ",", "k"}], "\[RightDoubleBracket]"}], ",", 
+                RowBox[{
+                "coord", "\[LeftDoubleBracket]", "s", 
+                 "\[RightDoubleBracket]"}]}], " ", "]"}]}], ")"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"s", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}], " ", "]"}]}]}], 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"riemann", ":=", 
+    RowBox[{"riemann", "=", 
+     RowBox[{"simp", "[", 
+      RowBox[{"Table", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"affine", "\[LeftDoubleBracket]", 
+            RowBox[{"i", ",", "j", ",", "l"}], "\[RightDoubleBracket]"}], ",", 
+           RowBox[{
+           "coord", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}]}], 
+          " ", "]"}], "-", 
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"affine", "\[LeftDoubleBracket]", 
+            RowBox[{"i", ",", "j", ",", "k"}], "\[RightDoubleBracket]"}], ",", 
+           RowBox[{
+           "coord", "\[LeftDoubleBracket]", "l", "\[RightDoubleBracket]"}]}], 
+          " ", "]"}], "+", "\[IndentingNewLine]", 
+         RowBox[{"Sum", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"affine", "\[LeftDoubleBracket]", 
+              RowBox[{"s", ",", "j", ",", "l"}], "\[RightDoubleBracket]"}], 
+             " ", 
+             RowBox[{"affine", "\[LeftDoubleBracket]", 
+              RowBox[{"i", ",", "k", ",", "s"}], "\[RightDoubleBracket]"}]}], 
+            "-", 
+            RowBox[{
+             RowBox[{"affine", "\[LeftDoubleBracket]", 
+              RowBox[{"s", ",", "j", ",", "k"}], "\[RightDoubleBracket]"}], 
+             " ", 
+             RowBox[{"affine", "\[LeftDoubleBracket]", 
+              RowBox[{"i", ",", "l", ",", "s"}], 
+              "\[RightDoubleBracket]"}]}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"s", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"l", ",", "1", ",", "n"}], "}"}]}], "]"}], " ", "]"}]}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ricci", ":=", 
+    RowBox[{"ricci", "=", 
+     RowBox[{"simp", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          RowBox[{"riemann", "\[LeftDoubleBracket]", 
+           RowBox[{"i", ",", "j", ",", "i", ",", "l"}], 
+           "\[RightDoubleBracket]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"l", ",", "1", ",", "n"}], "}"}]}], "]"}], " ", "]"}]}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"scalar", "=", 
+    RowBox[{"simp", "[", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"inversemetric", "\[LeftDoubleBracket]", 
+         RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}], 
+        RowBox[{"ricci", "\[LeftDoubleBracket]", 
+         RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"einstein", ":=", 
+   RowBox[{"einstein", "=", 
+    RowBox[{"simp", "[", 
+     RowBox[{"ricci", "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "/", "2"}], ")"}], "scalar", "*", "metric"}]}], 
+     "]"}]}]}], ";", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"einsteinUD", ":=", 
+     RowBox[{"einsteinUD", "=", 
+      RowBox[{"simp", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Sum", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"inversemetric", "\[LeftDoubleBracket]", 
+             RowBox[{"i", ",", "k"}], "\[RightDoubleBracket]"}], " ", 
+            RowBox[{"einstein", "\[LeftDoubleBracket]", 
+             RowBox[{"k", ",", "j"}], "\[RightDoubleBracket]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], "]"}]}]}], ";"}],
+    " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.624183219790483*^9, 3.624183242089526*^9}, {
+   3.624184594164124*^9, 3.6241845944845877`*^9}, 3.624186750467721*^9, {
+   3.624186796854106*^9, 3.624186800784308*^9}, {3.624186859514271*^9, 
+   3.624186860847378*^9}, {3.6242557394805393`*^9, 3.6242557546022577`*^9}, {
+   3.8632812299878693`*^9, 3.863281245007951*^9}, {3.86328129992162*^9, 
+   3.863281311044085*^9}, {3.863281433576819*^9, 3.863281437105014*^9}},
+ CellLabel->"In[55]:=",ExpressionUUID->"3882c9a0-fdd6-4e4f-8140-e2ca88603538"],
+
+Cell["\<\
+The syntax affine:=affine=... is meant to calculate the Christoffel symbol \
+only when it is used, and after that remembers the result for future usage \
+without recalculating.\
+\>", "Text",
+ CellChangeTimes->{{3.6241848494696836`*^9, 3.6241849023752127`*^9}, {
+   3.624255417272097*^9, 3.624255482370406*^9}, 3.6242557602501183`*^9, {
+   3.863282342090536*^9, 
+   3.863282344529236*^9}},ExpressionUUID->"5bb11cce-8b24-4b08-95ea-\
+085fdf77f52e"],
+
+Cell[TextData[{
+ "\[OpenCurlyDoubleQuote]einstein\[CloseCurlyDoubleQuote] stands for the \
+Einstein tensor with lower-lower indices ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["G", "\[Mu]\[Nu]"], TraditionalForm]],ExpressionUUID->
+  "ce6b05d8-1ecb-4d00-931b-f2fc8e5b0f99"],
+ ",\nand \[OpenCurlyDoubleQuote]einsteinUD\[CloseCurlyDoubleQuote] stands for \
+the Einstein tensor with mixed upper-lower indices ",
+ Cell[BoxData[
+  FormBox[
+   SubsuperscriptBox["G", 
+    RowBox[{"   ", "\[Nu]"}], "\[Mu]"], TraditionalForm]],ExpressionUUID->
+  "15287362-82ab-485a-b967-b4bef8a7d0af"],
+ " (commented out by default)."
+}], "Text",
+ CellChangeTimes->{{3.6241853750808363`*^9, 3.624185422715419*^9}, {
+  3.6241854580469522`*^9, 3.6241854742208967`*^9}, {3.624189218030361*^9, 
+  3.6241892242418623`*^9}, {3.624255517144107*^9, 3.624255640441304*^9}, {
+  3.624255671141011*^9, 3.6242556991069183`*^9}, {3.624255763897935*^9, 
+  3.6242557645779467`*^9}, {3.863281351740367*^9, 
+  3.863281362525816*^9}},ExpressionUUID->"62a87f72-a429-4067-9911-\
+fd6f1134e1d7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Christoffel symbols", "Subsection",
+ CellChangeTimes->{{3.624183950209113*^9, 3.6241839719685698`*^9}, {
+  3.624255792858609*^9, 3.624255793754106*^9}, {3.624255855132915*^9, 
+  3.62425586384525*^9}},ExpressionUUID->"43fa1511-b0c3-417f-981a-\
+be9a4d7b7305"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"listaffine", ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"UnsameQ", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"affine", "\[LeftDoubleBracket]", 
+          RowBox[{"i", ",", "j", ",", "k"}], "\[RightDoubleBracket]"}], "//", 
+         "Normal"}], ",", "0"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ToString", "[", 
+         RowBox[{"\[CapitalGamma]", "[", 
+          RowBox[{"i", ",", "j", ",", "k"}], "]"}], "]"}], ",", "\"\<=\>\"", 
+        ",", 
+        RowBox[{"affine", "\[LeftDoubleBracket]", 
+         RowBox[{"i", ",", "j", ",", "k"}], "\[RightDoubleBracket]"}]}], 
+       "}"}]}], "]"}], " ", ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "1", ",", "j"}], "}"}]}], "]"}]}], "\n", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"DeleteCases", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Flatten", "[", 
+         RowBox[{"listaffine", "//", "Normal"}], "]"}], "/.", 
+        RowBox[{"\[Epsilon]", "\[Rule]", "1"}]}], ",", "Null"}], "]"}], ",", 
+     "3"}], "]"}], ",", 
+   RowBox[{"TableSpacing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "2"}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.624184074499713*^9, 3.624184100926351*^9}, {
+  3.624184167372727*^9, 3.624184195438036*^9}, {3.624184394204886*^9, 
+  3.624184400219556*^9}, {3.624186733968375*^9, 3.6241867504853497`*^9}, {
+  3.624186812218212*^9, 3.6241868149914293`*^9}, {3.624186894982291*^9, 
+  3.624186897076995*^9}},
+ CellLabel->"In[61]:=",ExpressionUUID->"06c1af16-2451-4478-8a91-10cbce8e0b89"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"\[CapitalGamma][1, 1, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"x"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][1, 2, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"y"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][1, 2, 2]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"x"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][1, 3, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"z"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][1, 3, 3]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"x"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][1, 4, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "-", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}]},
+    {"\<\"\[CapitalGamma][1, 4, 4]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"x"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][2, 1, 1]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"y"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][2, 2, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"x"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][2, 2, 2]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"y"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][2, 3, 2]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"z"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][2, 3, 3]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"y"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][2, 4, 2]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "-", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}]},
+    {"\<\"\[CapitalGamma][2, 4, 4]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"y"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][3, 1, 1]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"z"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][3, 2, 2]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"z"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][3, 3, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"x"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][3, 3, 2]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"y"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][3, 3, 3]\"\>", "\<\"=\"\>", 
+     RowBox[{"-", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"z"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}]},
+    {"\<\"\[CapitalGamma][3, 4, 3]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "-", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}]},
+    {"\<\"\[CapitalGamma][3, 4, 4]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"z"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][4, 1, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "-", 
+      RowBox[{"4", " ", 
+       TagBox[
+        StyleBox["\[ScriptCapitalH]",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False], " ", 
+       TagBox[
+        StyleBox["\[CapitalPhi]",
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], "-", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}]},
+    {"\<\"\[CapitalGamma][4, 2, 2]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "-", 
+      RowBox[{"4", " ", 
+       TagBox[
+        StyleBox["\[ScriptCapitalH]",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False], " ", 
+       TagBox[
+        StyleBox["\[CapitalPhi]",
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], "-", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}]},
+    {"\<\"\[CapitalGamma][4, 3, 3]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "-", 
+      RowBox[{"4", " ", 
+       TagBox[
+        StyleBox["\[ScriptCapitalH]",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False], " ", 
+       TagBox[
+        StyleBox["\[CapitalPhi]",
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], "-", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}]},
+    {"\<\"\[CapitalGamma][4, 4, 1]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"x"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][4, 4, 2]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"y"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][4, 4, 3]\"\>", "\<\"=\"\>", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {""},
+            {"z"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]},
+    {"\<\"\[CapitalGamma][4, 4, 4]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "+", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}]}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[1.4]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.8]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$, TableSpacing -> {2, 2}]]]], "Output",
+ CellChangeTimes->{{3.624184075795211*^9, 3.624184101244631*^9}, {
+   3.62418413762182*^9, 3.624184195760027*^9}, 3.624184400434765*^9, 
+   3.6241846199183397`*^9, 3.624184663956609*^9, {3.624186871025956*^9, 
+   3.624186898401285*^9}, 3.6241875319749107`*^9, 3.624188052724341*^9, 
+   3.6241881226596727`*^9, 3.624188207979863*^9, 3.624188334412201*^9, 
+   3.624189244697008*^9, 3.624189524547797*^9, 3.624257422705597*^9, 
+   3.8200245892037497`*^9, 3.820024622460506*^9, 3.82002466627439*^9, 
+   3.820572544528308*^9, 3.8632827379601088`*^9, 3.8632831232709618`*^9},
+ CellLabel->
+  "Out[62]//TableForm=",ExpressionUUID->"88f08085-3916-43cc-a454-\
+e54460b430de"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Einstein tensor", "Subsection",
+ CellChangeTimes->{{3.6242558799744377`*^9, 
+  3.624255883414558*^9}},ExpressionUUID->"341f5a53-60cb-4aac-b4e3-\
+466c99959815"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"listeinstein", ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"UnsameQ", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"einstein", "\[LeftDoubleBracket]", 
+          RowBox[{"j", ",", "l"}], "\[RightDoubleBracket]"}], "//", 
+         "Normal"}], ",", "0"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ToString", "[", 
+         RowBox[{"G", "[", 
+          RowBox[{"j", ",", "l"}], "]"}], "]"}], ",", "\"\<=\>\"", ",", " ", 
+        RowBox[{"einstein", "\[LeftDoubleBracket]", 
+         RowBox[{"j", ",", "l"}], "\[RightDoubleBracket]"}]}], "}"}]}], "]"}],
+     " ", ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"l", ",", "1", ",", "j"}], "}"}]}], "]"}]}], "\n", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"DeleteCases", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Flatten", "[", 
+         RowBox[{"listeinstein", "//", "Normal"}], "]"}], "/.", 
+        RowBox[{"\[Epsilon]", "\[Rule]", "1"}]}], ",", "Null"}], "]"}], ",", 
+     "3"}], "]"}], ",", 
+   RowBox[{"TableSpacing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "2"}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6241842382488956`*^9, 3.6241842536424*^9}, {
+  3.624184376963018*^9, 3.62418438773932*^9}, {3.62418673397153*^9, 
+  3.624186750487776*^9}, {3.624186826368841*^9, 3.624186828096641*^9}, {
+  3.6241869026871557`*^9, 3.624186904441428*^9}},
+ CellLabel->"In[63]:=",ExpressionUUID->"e2e2a042-b8b8-4e9b-8f4a-31d420f28a04"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"G[1, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      RowBox[{"-", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["\[ScriptCapitalH]",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"]}], "-", 
+      RowBox[{"2", " ", 
+       TagBox[
+        StyleBox[
+         SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+          MultilineFunction->None],
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False]}], "+", 
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox[
+           TagBox[
+            StyleBox["\[ScriptCapitalH]",
+             LineColor->RGBColor[0.5, 0, 0.5],
+             FrontFaceColor->RGBColor[0.5, 0, 0.5],
+             BackFaceColor->RGBColor[0.5, 0, 0.5],
+             GraphicsColor->RGBColor[0.5, 0, 0.5],
+             FontColor->RGBColor[0.5, 0, 0.5]],
+            "GREFX0",
+            Selectable->False], "2"], " ", 
+          TagBox[
+           StyleBox["\[CapitalPhi]",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False]}], "+", 
+         RowBox[{"4", " ", 
+          TagBox[
+           StyleBox["\[CapitalPhi]",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False], " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0.5, 0, 0.5],
+            FrontFaceColor->RGBColor[0.5, 0, 0.5],
+            BackFaceColor->RGBColor[0.5, 0, 0.5],
+            GraphicsColor->RGBColor[0.5, 0, 0.5],
+            FontColor->RGBColor[0.5, 0, 0.5]],
+           "GREFX0",
+           Selectable->False]}], "+", 
+         RowBox[{"3", " ", 
+          TagBox[
+           StyleBox["\[ScriptCapitalH]",
+            LineColor->RGBColor[0.5, 0, 0.5],
+            FrontFaceColor->RGBColor[0.5, 0, 0.5],
+            BackFaceColor->RGBColor[0.5, 0, 0.5],
+            GraphicsColor->RGBColor[0.5, 0, 0.5],
+            FontColor->RGBColor[0.5, 0, 0.5]],
+           "GREFX0",
+           Selectable->False], " ", 
+          RowBox[{"(", 
+           TagBox[GridBox[{
+              {"\[PartialD]", 
+               StyleBox[GridBox[{
+                  {""},
+                  {"\[Eta]"}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}},
+                 Selectable->True],
+                FontSize->10], GridBox[{
+                 {
+                  TagBox[
+                   StyleBox["\[CapitalPhi]",
+                    LineColor->RGBColor[1, 0, 0],
+                    FrontFaceColor->RGBColor[1, 0, 0],
+                    BackFaceColor->RGBColor[1, 0, 0],
+                    GraphicsColor->RGBColor[1, 0, 0],
+                    FontColor->RGBColor[1, 0, 0]],
+                   "GREFX",
+                   Selectable->False]}
+                },
+                Selectable->True]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}}],
+            "GRED",
+            Selectable->False], ")"}]}], "+", 
+         TagBox[GridBox[{
+            {"\[PartialD]", 
+             StyleBox[GridBox[{
+                {"2"},
+                {"\[Eta]"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}},
+               Selectable->True],
+              FontSize->10], GridBox[{
+               {
+                TagBox[
+                 StyleBox["\[CapitalPhi]",
+                  LineColor->RGBColor[1, 0, 0],
+                  FrontFaceColor->RGBColor[1, 0, 0],
+                  BackFaceColor->RGBColor[1, 0, 0],
+                  GraphicsColor->RGBColor[1, 0, 0],
+                  FontColor->RGBColor[1, 0, 0]],
+                 "GREFX",
+                 Selectable->False]}
+              },
+              Selectable->True]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}}],
+          "GRED",
+          Selectable->False]}], ")"}]}]}]},
+    {"\<\"G[2, 2]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      RowBox[{"-", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["\[ScriptCapitalH]",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"]}], "-", 
+      RowBox[{"2", " ", 
+       TagBox[
+        StyleBox[
+         SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+          MultilineFunction->None],
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False]}], "+", 
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox[
+           TagBox[
+            StyleBox["\[ScriptCapitalH]",
+             LineColor->RGBColor[0.5, 0, 0.5],
+             FrontFaceColor->RGBColor[0.5, 0, 0.5],
+             BackFaceColor->RGBColor[0.5, 0, 0.5],
+             GraphicsColor->RGBColor[0.5, 0, 0.5],
+             FontColor->RGBColor[0.5, 0, 0.5]],
+            "GREFX0",
+            Selectable->False], "2"], " ", 
+          TagBox[
+           StyleBox["\[CapitalPhi]",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False]}], "+", 
+         RowBox[{"4", " ", 
+          TagBox[
+           StyleBox["\[CapitalPhi]",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False], " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0.5, 0, 0.5],
+            FrontFaceColor->RGBColor[0.5, 0, 0.5],
+            BackFaceColor->RGBColor[0.5, 0, 0.5],
+            GraphicsColor->RGBColor[0.5, 0, 0.5],
+            FontColor->RGBColor[0.5, 0, 0.5]],
+           "GREFX0",
+           Selectable->False]}], "+", 
+         RowBox[{"3", " ", 
+          TagBox[
+           StyleBox["\[ScriptCapitalH]",
+            LineColor->RGBColor[0.5, 0, 0.5],
+            FrontFaceColor->RGBColor[0.5, 0, 0.5],
+            BackFaceColor->RGBColor[0.5, 0, 0.5],
+            GraphicsColor->RGBColor[0.5, 0, 0.5],
+            FontColor->RGBColor[0.5, 0, 0.5]],
+           "GREFX0",
+           Selectable->False], " ", 
+          RowBox[{"(", 
+           TagBox[GridBox[{
+              {"\[PartialD]", 
+               StyleBox[GridBox[{
+                  {""},
+                  {"\[Eta]"}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}},
+                 Selectable->True],
+                FontSize->10], GridBox[{
+                 {
+                  TagBox[
+                   StyleBox["\[CapitalPhi]",
+                    LineColor->RGBColor[1, 0, 0],
+                    FrontFaceColor->RGBColor[1, 0, 0],
+                    BackFaceColor->RGBColor[1, 0, 0],
+                    GraphicsColor->RGBColor[1, 0, 0],
+                    FontColor->RGBColor[1, 0, 0]],
+                   "GREFX",
+                   Selectable->False]}
+                },
+                Selectable->True]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}}],
+            "GRED",
+            Selectable->False], ")"}]}], "+", 
+         TagBox[GridBox[{
+            {"\[PartialD]", 
+             StyleBox[GridBox[{
+                {"2"},
+                {"\[Eta]"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}},
+               Selectable->True],
+              FontSize->10], GridBox[{
+               {
+                TagBox[
+                 StyleBox["\[CapitalPhi]",
+                  LineColor->RGBColor[1, 0, 0],
+                  FrontFaceColor->RGBColor[1, 0, 0],
+                  BackFaceColor->RGBColor[1, 0, 0],
+                  GraphicsColor->RGBColor[1, 0, 0],
+                  FontColor->RGBColor[1, 0, 0]],
+                 "GREFX",
+                 Selectable->False]}
+              },
+              Selectable->True]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}}],
+          "GRED",
+          Selectable->False]}], ")"}]}]}]},
+    {"\<\"G[3, 3]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      RowBox[{"-", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["\[ScriptCapitalH]",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"]}], "-", 
+      RowBox[{"2", " ", 
+       TagBox[
+        StyleBox[
+         SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+          MultilineFunction->None],
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False]}], "+", 
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox[
+           TagBox[
+            StyleBox["\[ScriptCapitalH]",
+             LineColor->RGBColor[0.5, 0, 0.5],
+             FrontFaceColor->RGBColor[0.5, 0, 0.5],
+             BackFaceColor->RGBColor[0.5, 0, 0.5],
+             GraphicsColor->RGBColor[0.5, 0, 0.5],
+             FontColor->RGBColor[0.5, 0, 0.5]],
+            "GREFX0",
+            Selectable->False], "2"], " ", 
+          TagBox[
+           StyleBox["\[CapitalPhi]",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False]}], "+", 
+         RowBox[{"4", " ", 
+          TagBox[
+           StyleBox["\[CapitalPhi]",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False], " ", 
+          TagBox[
+           StyleBox[
+            SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+             MultilineFunction->None],
+            LineColor->RGBColor[0.5, 0, 0.5],
+            FrontFaceColor->RGBColor[0.5, 0, 0.5],
+            BackFaceColor->RGBColor[0.5, 0, 0.5],
+            GraphicsColor->RGBColor[0.5, 0, 0.5],
+            FontColor->RGBColor[0.5, 0, 0.5]],
+           "GREFX0",
+           Selectable->False]}], "+", 
+         RowBox[{"3", " ", 
+          TagBox[
+           StyleBox["\[ScriptCapitalH]",
+            LineColor->RGBColor[0.5, 0, 0.5],
+            FrontFaceColor->RGBColor[0.5, 0, 0.5],
+            BackFaceColor->RGBColor[0.5, 0, 0.5],
+            GraphicsColor->RGBColor[0.5, 0, 0.5],
+            FontColor->RGBColor[0.5, 0, 0.5]],
+           "GREFX0",
+           Selectable->False], " ", 
+          RowBox[{"(", 
+           TagBox[GridBox[{
+              {"\[PartialD]", 
+               StyleBox[GridBox[{
+                  {""},
+                  {"\[Eta]"}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}},
+                 Selectable->True],
+                FontSize->10], GridBox[{
+                 {
+                  TagBox[
+                   StyleBox["\[CapitalPhi]",
+                    LineColor->RGBColor[1, 0, 0],
+                    FrontFaceColor->RGBColor[1, 0, 0],
+                    BackFaceColor->RGBColor[1, 0, 0],
+                    GraphicsColor->RGBColor[1, 0, 0],
+                    FontColor->RGBColor[1, 0, 0]],
+                   "GREFX",
+                   Selectable->False]}
+                },
+                Selectable->True]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}}],
+            "GRED",
+            Selectable->False], ")"}]}], "+", 
+         TagBox[GridBox[{
+            {"\[PartialD]", 
+             StyleBox[GridBox[{
+                {"2"},
+                {"\[Eta]"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}},
+               Selectable->True],
+              FontSize->10], GridBox[{
+               {
+                TagBox[
+                 StyleBox["\[CapitalPhi]",
+                  LineColor->RGBColor[1, 0, 0],
+                  FrontFaceColor->RGBColor[1, 0, 0],
+                  BackFaceColor->RGBColor[1, 0, 0],
+                  GraphicsColor->RGBColor[1, 0, 0],
+                  FontColor->RGBColor[1, 0, 0]],
+                 "GREFX",
+                 Selectable->False]}
+              },
+              Selectable->True]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}}],
+          "GRED",
+          Selectable->False]}], ")"}]}]}]},
+    {"\<\"G[4, 1]\"\>", "\<\"=\"\>", 
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         TagBox[
+          StyleBox["\[ScriptCapitalH]",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], " ", 
+         RowBox[{"(", 
+          TagBox[GridBox[{
+             {"\[PartialD]", 
+              StyleBox[GridBox[{
+                 {""},
+                 {"x"}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}},
+                Selectable->True],
+               FontSize->10], GridBox[{
+                {
+                 TagBox[
+                  StyleBox["\[CapitalPhi]",
+                   LineColor->RGBColor[1, 0, 0],
+                   FrontFaceColor->RGBColor[1, 0, 0],
+                   BackFaceColor->RGBColor[1, 0, 0],
+                   GraphicsColor->RGBColor[1, 0, 0],
+                   FontColor->RGBColor[1, 0, 0]],
+                  "GREFX",
+                  Selectable->False]}
+               },
+               Selectable->True]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}}],
+           "GRED",
+           Selectable->False], ")"}]}], "+", 
+        TagBox[GridBox[{
+           {"\[PartialD]", 
+            StyleBox[GridBox[{
+               {"", ""},
+               {"x", "\[Eta]"}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.]}, 
+                  Offset[0.2]}},
+              Selectable->True],
+             FontSize->10], GridBox[{
+              {
+               TagBox[
+                StyleBox["\[CapitalPhi]",
+                 LineColor->RGBColor[1, 0, 0],
+                 FrontFaceColor->RGBColor[1, 0, 0],
+                 BackFaceColor->RGBColor[1, 0, 0],
+                 GraphicsColor->RGBColor[1, 0, 0],
+                 FontColor->RGBColor[1, 0, 0]],
+                "GREFX",
+                Selectable->False]}
+             },
+             Selectable->True]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}}],
+         "GRED",
+         Selectable->False]}], ")"}]}]},
+    {"\<\"G[4, 2]\"\>", "\<\"=\"\>", 
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         TagBox[
+          StyleBox["\[ScriptCapitalH]",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], " ", 
+         RowBox[{"(", 
+          TagBox[GridBox[{
+             {"\[PartialD]", 
+              StyleBox[GridBox[{
+                 {""},
+                 {"y"}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}},
+                Selectable->True],
+               FontSize->10], GridBox[{
+                {
+                 TagBox[
+                  StyleBox["\[CapitalPhi]",
+                   LineColor->RGBColor[1, 0, 0],
+                   FrontFaceColor->RGBColor[1, 0, 0],
+                   BackFaceColor->RGBColor[1, 0, 0],
+                   GraphicsColor->RGBColor[1, 0, 0],
+                   FontColor->RGBColor[1, 0, 0]],
+                  "GREFX",
+                  Selectable->False]}
+               },
+               Selectable->True]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}}],
+           "GRED",
+           Selectable->False], ")"}]}], "+", 
+        TagBox[GridBox[{
+           {"\[PartialD]", 
+            StyleBox[GridBox[{
+               {"", ""},
+               {"y", "\[Eta]"}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.]}, 
+                  Offset[0.2]}},
+              Selectable->True],
+             FontSize->10], GridBox[{
+              {
+               TagBox[
+                StyleBox["\[CapitalPhi]",
+                 LineColor->RGBColor[1, 0, 0],
+                 FrontFaceColor->RGBColor[1, 0, 0],
+                 BackFaceColor->RGBColor[1, 0, 0],
+                 GraphicsColor->RGBColor[1, 0, 0],
+                 FontColor->RGBColor[1, 0, 0]],
+                "GREFX",
+                Selectable->False]}
+             },
+             Selectable->True]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}}],
+         "GRED",
+         Selectable->False]}], ")"}]}]},
+    {"\<\"G[4, 3]\"\>", "\<\"=\"\>", 
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         TagBox[
+          StyleBox["\[ScriptCapitalH]",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], " ", 
+         RowBox[{"(", 
+          TagBox[GridBox[{
+             {"\[PartialD]", 
+              StyleBox[GridBox[{
+                 {""},
+                 {"z"}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}},
+                Selectable->True],
+               FontSize->10], GridBox[{
+                {
+                 TagBox[
+                  StyleBox["\[CapitalPhi]",
+                   LineColor->RGBColor[1, 0, 0],
+                   FrontFaceColor->RGBColor[1, 0, 0],
+                   BackFaceColor->RGBColor[1, 0, 0],
+                   GraphicsColor->RGBColor[1, 0, 0],
+                   FontColor->RGBColor[1, 0, 0]],
+                  "GREFX",
+                  Selectable->False]}
+               },
+               Selectable->True]}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}}],
+           "GRED",
+           Selectable->False], ")"}]}], "+", 
+        TagBox[GridBox[{
+           {"\[PartialD]", 
+            StyleBox[GridBox[{
+               {"", ""},
+               {"z", "\[Eta]"}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.]}, 
+                  Offset[0.2]}},
+              Selectable->True],
+             FontSize->10], GridBox[{
+              {
+               TagBox[
+                StyleBox["\[CapitalPhi]",
+                 LineColor->RGBColor[1, 0, 0],
+                 FrontFaceColor->RGBColor[1, 0, 0],
+                 BackFaceColor->RGBColor[1, 0, 0],
+                 GraphicsColor->RGBColor[1, 0, 0],
+                 FontColor->RGBColor[1, 0, 0]],
+                "GREFX",
+                Selectable->False]}
+             },
+             Selectable->True]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}}],
+         "GRED",
+         Selectable->False]}], ")"}]}]},
+    {"\<\"G[4, 4]\"\>", "\<\"=\"\>", 
+     RowBox[{
+      RowBox[{"3", " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["\[ScriptCapitalH]",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"]}], "+", 
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "3"}], " ", 
+          TagBox[
+           StyleBox["\[ScriptCapitalH]",
+            LineColor->RGBColor[0.5, 0, 0.5],
+            FrontFaceColor->RGBColor[0.5, 0, 0.5],
+            BackFaceColor->RGBColor[0.5, 0, 0.5],
+            GraphicsColor->RGBColor[0.5, 0, 0.5],
+            FontColor->RGBColor[0.5, 0, 0.5]],
+           "GREFX0",
+           Selectable->False], " ", 
+          RowBox[{"(", 
+           TagBox[GridBox[{
+              {"\[PartialD]", 
+               StyleBox[GridBox[{
+                  {""},
+                  {"\[Eta]"}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.]}, 
+                    Offset[0.2]}},
+                 Selectable->True],
+                FontSize->10], GridBox[{
+                 {
+                  TagBox[
+                   StyleBox["\[CapitalPhi]",
+                    LineColor->RGBColor[1, 0, 0],
+                    FrontFaceColor->RGBColor[1, 0, 0],
+                    BackFaceColor->RGBColor[1, 0, 0],
+                    GraphicsColor->RGBColor[1, 0, 0],
+                    FontColor->RGBColor[1, 0, 0]],
+                   "GREFX",
+                   Selectable->False]}
+                },
+                Selectable->True]}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}}],
+            "GRED",
+            Selectable->False], ")"}]}], "+", 
+         TagBox[GridBox[{
+            {"\[PartialD]", 
+             StyleBox[GridBox[{
+                {"2"},
+                {"z"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}},
+               Selectable->True],
+              FontSize->10], GridBox[{
+               {
+                TagBox[
+                 StyleBox["\[CapitalPhi]",
+                  LineColor->RGBColor[1, 0, 0],
+                  FrontFaceColor->RGBColor[1, 0, 0],
+                  BackFaceColor->RGBColor[1, 0, 0],
+                  GraphicsColor->RGBColor[1, 0, 0],
+                  FontColor->RGBColor[1, 0, 0]],
+                 "GREFX",
+                 Selectable->False]}
+              },
+              Selectable->True]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}}],
+          "GRED",
+          Selectable->False], "+", 
+         TagBox[GridBox[{
+            {"\[PartialD]", 
+             StyleBox[GridBox[{
+                {"2"},
+                {"y"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}},
+               Selectable->True],
+              FontSize->10], GridBox[{
+               {
+                TagBox[
+                 StyleBox["\[CapitalPhi]",
+                  LineColor->RGBColor[1, 0, 0],
+                  FrontFaceColor->RGBColor[1, 0, 0],
+                  BackFaceColor->RGBColor[1, 0, 0],
+                  GraphicsColor->RGBColor[1, 0, 0],
+                  FontColor->RGBColor[1, 0, 0]],
+                 "GREFX",
+                 Selectable->False]}
+              },
+              Selectable->True]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}}],
+          "GRED",
+          Selectable->False], "+", 
+         TagBox[GridBox[{
+            {"\[PartialD]", 
+             StyleBox[GridBox[{
+                {"2"},
+                {"x"}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                   Offset[0.27999999999999997`]}, "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.]}, 
+                   Offset[0.2]}},
+               Selectable->True],
+              FontSize->10], GridBox[{
+               {
+                TagBox[
+                 StyleBox["\[CapitalPhi]",
+                  LineColor->RGBColor[1, 0, 0],
+                  FrontFaceColor->RGBColor[1, 0, 0],
+                  BackFaceColor->RGBColor[1, 0, 0],
+                  GraphicsColor->RGBColor[1, 0, 0],
+                  FontColor->RGBColor[1, 0, 0]],
+                 "GREFX",
+                 Selectable->False]}
+              },
+              Selectable->True]}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}}],
+          "GRED",
+          Selectable->False]}], ")"}]}]}]}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[1.4]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.8]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$, TableSpacing -> {2, 2}]]]], "Output",
+ CellChangeTimes->{{3.6241842474669323`*^9, 3.62418425049398*^9}, {
+   3.62418437969309*^9, 3.624184388090959*^9}, 3.624184619971656*^9, 
+   3.624184664069511*^9, {3.624186871235837*^9, 3.624186905154282*^9}, 
+   3.624187532086631*^9, 3.624188052831558*^9, 3.624188122767476*^9, 
+   3.624188208087563*^9, 3.624188334533771*^9, 3.624189244823786*^9, 
+   3.624189524669052*^9, 3.6242574228455772`*^9, 3.820024589391201*^9, {
+   3.8200246225196466`*^9, 3.820024633334758*^9}, 3.8200246663060303`*^9, 
+   3.8205725446447487`*^9, 3.863282738075885*^9, 3.8632831233289833`*^9},
+ CellLabel->
+  "Out[64]//TableForm=",ExpressionUUID->"3eb227a4-cc2c-42ee-8efa-\
+f5dcbb17495b"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"listeinsteinUD", ":=", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"UnsameQ", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"einsteinUD", "\[LeftDoubleBracket]", 
+            RowBox[{"j", ",", "l"}], "\[RightDoubleBracket]"}], "//", 
+           "Normal"}], ",", "0"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"G", "[", 
+            RowBox[{"j", ",", "l"}], "]"}], "]"}], ",", "\"\<=\>\"", ",", " ", 
+          RowBox[{"einsteinUD", "\[LeftDoubleBracket]", 
+           RowBox[{"j", ",", "l"}], "\[RightDoubleBracket]"}]}], "}"}]}], 
+       "]"}], " ", ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"l", ",", "1", ",", "j"}], "}"}]}], "]"}], "\n", 
+    RowBox[{"TableForm", "[", 
+     RowBox[{
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Flatten", "[", 
+            RowBox[{"listeinsteinUD", "//", "Normal"}], "]"}], "/.", 
+           RowBox[{"\[Epsilon]", "\[Rule]", "1"}]}], ",", "Null"}], "]"}], 
+        ",", "3"}], "]"}], ",", 
+      RowBox[{"TableSpacing", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "2"}], "}"}]}]}], "]"}]}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.6241856118847647`*^9, 3.624185622186674*^9}, {
+   3.624186733975299*^9, 3.6241867504900713`*^9}, {3.624186831920414*^9, 
+   3.624186834144987*^9}, {3.624186888928487*^9, 3.62418689032633*^9}, 
+   3.62418922993536*^9},
+ CellLabel->"In[65]:=",ExpressionUUID->"b048f474-c18f-4da4-8d8a-057436b64df1"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Stress tensor", "Section",
+ CellChangeTimes->{{3.624184792402952*^9, 3.624184794764539*^9}, 
+   3.624254437722324*^9},
+ FontSize->24,ExpressionUUID->"7e6f3019-3482-48d0-a90d-8f293232a4b2"],
+
+Cell[TextData[{
+ StyleBox["Define the perturbed fluid. ",
+  FontWeight->"SemiBold"],
+ "\n\n\[OpenCurlyDoubleQuote]uU\[CloseCurlyDoubleQuote] stands for ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["U", "\[Mu]"], TraditionalForm]],ExpressionUUID->
+  "1ad059a0-be8f-4d6d-b99e-80e6957f33e9"],
+ ", and \[OpenCurlyDoubleQuote]uD\[CloseCurlyDoubleQuote] stands for ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["U", "\[Mu]"], TraditionalForm]],ExpressionUUID->
+  "b0201034-818e-4de9-a317-036a14d9b3c8"],
+ ". \n\[OpenCurlyDoubleQuote]stress\[CloseCurlyDoubleQuote] stands for ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "\[Mu]\[Nu]"], TraditionalForm]],ExpressionUUID->
+  "03323851-c5a8-4425-a7d8-8a957868ce35"],
+ ".\n\[OpenCurlyDoubleQuote]anisotropic stress\[CloseCurlyDoubleQuote] is \
+commented out by default."
+}], "Text",
+ CellChangeTimes->{{3.624185069029975*^9, 3.6241850801209517`*^9}, {
+   3.624185262018821*^9, 3.624185282131895*^9}, {3.624185318039723*^9, 
+   3.6241853583364563`*^9}, 3.624185776073469*^9, {3.624255923419565*^9, 
+   3.624255959620634*^9}, {3.6242560983226137`*^9, 3.6242561204833317`*^9}, {
+   3.8632821041169567`*^9, 
+   3.863282109519115*^9}},ExpressionUUID->"26d94496-1667-48b3-b1b9-\
+aabae1df265a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"velocity", "=", 
+    RowBox[{"\[Epsilon]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"v", "[", "1", "]"}], "[", 
+        RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"v", "[", "2", "]"}], "[", 
+        RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"v", "[", "3", "]"}], "[", 
+        RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}], "}"}]}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"uU", "=", 
+   RowBox[{
+    RowBox[{"Append", "[", 
+     RowBox[{"velocity", ",", " ", 
+      RowBox[{"1", "-", 
+       RowBox[{"\[Epsilon]", " ", 
+        RowBox[{"\[CapitalPsi]", "[", 
+         RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}]}], "]"}],
+     "/", 
+    RowBox[{"a", "[", "\[Eta]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"uD", "=", 
+    RowBox[{
+     RowBox[{"Append", "[", 
+      RowBox[{
+       RowBox[{"-", "velocity"}], ",", " ", 
+       RowBox[{"1", "+", 
+        RowBox[{"\[Epsilon]", " ", 
+         RowBox[{"\[CapitalPsi]", "[", 
+          RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}]}], 
+      "]"}], "*", 
+     RowBox[{"a", "[", "\[Eta]", "]"}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Rho]", "=", 
+   RowBox[{
+    RowBox[{"\[Rho]0", "[", "\[Eta]", "]"}], " ", "+", " ", 
+    RowBox[{"\[Epsilon]", " ", 
+     RowBox[{"\[Delta]\[Rho]", "[", 
+      RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", "=", 
+   RowBox[{
+    RowBox[{"P0", "[", "\[Eta]", "]"}], " ", "+", " ", 
+    RowBox[{"\[Epsilon]", " ", 
+     RowBox[{"\[Delta]P", "[", 
+      RowBox[{"x", ",", "y", ",", "z", ",", "\[Eta]"}], "]"}]}]}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[CapitalPi]", "[", 
+      RowBox[{"4", ",", "\[Mu]_"}], "]"}], ":=", "0"}], ";", 
+    RowBox[{
+     RowBox[{"\[CapitalPi]", "[", 
+      RowBox[{"\[Mu]_", ",", "4"}], "]"}], ":=", "0"}], ";"}], 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.624187057380912*^9, 3.624187073446095*^9}, {
+  3.624187508848708*^9, 3.624187518264501*^9}, {3.624255993424486*^9, 
+  3.624255996765428*^9}, {3.863282004231772*^9, 3.8632820636770363`*^9}, {
+  3.863282120077331*^9, 3.863282127541601*^9}},
+ CellLabel->"In[66]:=",ExpressionUUID->"6c291ac3-5c20-4311-b0a1-de36cb7e9461"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"stress", ":=", 
+   RowBox[{"stress", "=", " ", 
+    RowBox[{"simp", "[", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"\[Rho]", "+", "P"}], ")"}], 
+          RowBox[{
+          "uD", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+          RowBox[{
+          "uD", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}]}], "-", 
+         RowBox[{"P", " ", 
+          RowBox[{"metric", "\[LeftDoubleBracket]", 
+           RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}]}]}], 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"-", "\[Epsilon]"}], " ", 
+          RowBox[{"\[CapitalPi]", "[", 
+           RowBox[{"i", ",", "j"}], "]"}]}], "*)"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], " ", "+", " ", 
+      SuperscriptBox[
+       RowBox[{"O", "[", "\[Epsilon]", "]"}], "2"]}], "]"}]}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.624184813113955*^9, 3.624184824673504*^9}, {
+   3.624184913372401*^9, 3.624184936143086*^9}, {3.6241860750938187`*^9, 
+   3.62418607717962*^9}, {3.624186119705833*^9, 3.624186176070673*^9}, {
+   3.624186210618932*^9, 3.6241862373961477`*^9}, {3.6241863827467127`*^9, 
+   3.6241863885679073`*^9}, {3.6241864932697906`*^9, 3.624186496516836*^9}, 
+   3.624186593308536*^9, {3.62418665874084*^9, 3.6241866820381527`*^9}, {
+   3.624186733978938*^9, 3.62418675049656*^9}},
+ CellLabel->"In[71]:=",ExpressionUUID->"7fd0cb0d-e367-42aa-ae75-8eb52ba27506"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"stress", "//", "Normal"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.62418618918545*^9, 3.62418619260795*^9}, 
+   3.624186498353136*^9},
+ CellLabel->"In[72]:=",ExpressionUUID->"80250792-b00a-4ba0-b470-dc2feda3e511"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        TagBox[
+         StyleBox["P0",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False]}], "+", 
+       RowBox[{"\[Epsilon]", " ", 
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           StyleBox["\[Delta]P",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False], "-", 
+          RowBox[{"2", " ", 
+           TagBox[
+            StyleBox["P0",
+             LineColor->RGBColor[0.5, 0, 0.5],
+             FrontFaceColor->RGBColor[0.5, 0, 0.5],
+             BackFaceColor->RGBColor[0.5, 0, 0.5],
+             GraphicsColor->RGBColor[0.5, 0, 0.5],
+             FontColor->RGBColor[0.5, 0, 0.5]],
+            "GREFX0",
+            Selectable->False], " ", 
+           TagBox[
+            StyleBox["\[CapitalPhi]",
+             LineColor->RGBColor[1, 0, 0],
+             FrontFaceColor->RGBColor[1, 0, 0],
+             BackFaceColor->RGBColor[1, 0, 0],
+             GraphicsColor->RGBColor[1, 0, 0],
+             FontColor->RGBColor[1, 0, 0]],
+            "GREFX",
+            Selectable->False]}]}], ")"}]}]}], "0", "0", 
+      RowBox[{
+       RowBox[{"-", "\[Epsilon]"}], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         TagBox[
+          StyleBox["P0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "+", 
+         TagBox[
+          StyleBox["\[Rho]0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False]}], ")"}], " ", 
+       TagBox[
+        StyleBox[
+         RowBox[{"v", "[", "1", "]"}],
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}]},
+     {"0", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        TagBox[
+         StyleBox["P0",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False]}], "+", 
+       RowBox[{"\[Epsilon]", " ", 
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           StyleBox["\[Delta]P",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False], "-", 
+          RowBox[{"2", " ", 
+           TagBox[
+            StyleBox["P0",
+             LineColor->RGBColor[0.5, 0, 0.5],
+             FrontFaceColor->RGBColor[0.5, 0, 0.5],
+             BackFaceColor->RGBColor[0.5, 0, 0.5],
+             GraphicsColor->RGBColor[0.5, 0, 0.5],
+             FontColor->RGBColor[0.5, 0, 0.5]],
+            "GREFX0",
+            Selectable->False], " ", 
+           TagBox[
+            StyleBox["\[CapitalPhi]",
+             LineColor->RGBColor[1, 0, 0],
+             FrontFaceColor->RGBColor[1, 0, 0],
+             BackFaceColor->RGBColor[1, 0, 0],
+             GraphicsColor->RGBColor[1, 0, 0],
+             FontColor->RGBColor[1, 0, 0]],
+            "GREFX",
+            Selectable->False]}]}], ")"}]}]}], "0", 
+      RowBox[{
+       RowBox[{"-", "\[Epsilon]"}], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         TagBox[
+          StyleBox["P0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "+", 
+         TagBox[
+          StyleBox["\[Rho]0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False]}], ")"}], " ", 
+       TagBox[
+        StyleBox[
+         RowBox[{"v", "[", "2", "]"}],
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}]},
+     {"0", "0", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        TagBox[
+         StyleBox["P0",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False]}], "+", 
+       RowBox[{"\[Epsilon]", " ", 
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           StyleBox["\[Delta]P",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False], "-", 
+          RowBox[{"2", " ", 
+           TagBox[
+            StyleBox["P0",
+             LineColor->RGBColor[0.5, 0, 0.5],
+             FrontFaceColor->RGBColor[0.5, 0, 0.5],
+             BackFaceColor->RGBColor[0.5, 0, 0.5],
+             GraphicsColor->RGBColor[0.5, 0, 0.5],
+             FontColor->RGBColor[0.5, 0, 0.5]],
+            "GREFX0",
+            Selectable->False], " ", 
+           TagBox[
+            StyleBox["\[CapitalPhi]",
+             LineColor->RGBColor[1, 0, 0],
+             FrontFaceColor->RGBColor[1, 0, 0],
+             BackFaceColor->RGBColor[1, 0, 0],
+             GraphicsColor->RGBColor[1, 0, 0],
+             FontColor->RGBColor[1, 0, 0]],
+            "GREFX",
+            Selectable->False]}]}], ")"}]}]}], 
+      RowBox[{
+       RowBox[{"-", "\[Epsilon]"}], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         TagBox[
+          StyleBox["P0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "+", 
+         TagBox[
+          StyleBox["\[Rho]0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False]}], ")"}], " ", 
+       TagBox[
+        StyleBox[
+         RowBox[{"v", "[", "3", "]"}],
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}]},
+     {
+      RowBox[{
+       RowBox[{"-", "\[Epsilon]"}], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         TagBox[
+          StyleBox["P0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "+", 
+         TagBox[
+          StyleBox["\[Rho]0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False]}], ")"}], " ", 
+       TagBox[
+        StyleBox[
+         RowBox[{"v", "[", "1", "]"}],
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], 
+      RowBox[{
+       RowBox[{"-", "\[Epsilon]"}], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         TagBox[
+          StyleBox["P0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "+", 
+         TagBox[
+          StyleBox["\[Rho]0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False]}], ")"}], " ", 
+       TagBox[
+        StyleBox[
+         RowBox[{"v", "[", "2", "]"}],
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], 
+      RowBox[{
+       RowBox[{"-", "\[Epsilon]"}], " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         TagBox[
+          StyleBox["P0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "+", 
+         TagBox[
+          StyleBox["\[Rho]0",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False]}], ")"}], " ", 
+       TagBox[
+        StyleBox[
+         RowBox[{"v", "[", "3", "]"}],
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        TagBox[
+         StyleBox["\[Rho]0",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False]}], "+", 
+       RowBox[{"\[Epsilon]", " ", 
+        SuperscriptBox[
+         TagBox[
+          StyleBox["a",
+           LineColor->RGBColor[0.5, 0, 0.5],
+           FrontFaceColor->RGBColor[0.5, 0, 0.5],
+           BackFaceColor->RGBColor[0.5, 0, 0.5],
+           GraphicsColor->RGBColor[0.5, 0, 0.5],
+           FontColor->RGBColor[0.5, 0, 0.5]],
+          "GREFX0",
+          Selectable->False], "2"], " ", 
+        TagBox[
+         StyleBox["\[Rho]0",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           StyleBox["\[Delta]",
+            LineColor->RGBColor[1, 0, 0],
+            FrontFaceColor->RGBColor[1, 0, 0],
+            BackFaceColor->RGBColor[1, 0, 0],
+            GraphicsColor->RGBColor[1, 0, 0],
+            FontColor->RGBColor[1, 0, 0]],
+           "GREFX",
+           Selectable->False], "+", 
+          RowBox[{"2", " ", 
+           TagBox[
+            StyleBox["\[CapitalPhi]",
+             LineColor->RGBColor[1, 0, 0],
+             FrontFaceColor->RGBColor[1, 0, 0],
+             BackFaceColor->RGBColor[1, 0, 0],
+             GraphicsColor->RGBColor[1, 0, 0],
+             FontColor->RGBColor[1, 0, 0]],
+            "GREFX",
+            Selectable->False]}]}], ")"}]}]}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.624187129421365*^9, 3.624187532256116*^9, 
+  3.6241880529760313`*^9, 3.6241881229172*^9, 3.624188208239985*^9, 
+  3.624188334688545*^9, 3.624189244916711*^9, 3.624189524736773*^9, 
+  3.624257422942111*^9, 3.820024589464979*^9, 3.820024622566523*^9, 
+  3.820024666348413*^9, 3.8205725447056417`*^9, 3.863282738117035*^9, 
+  3.863283123386815*^9},
+ CellLabel->
+  "Out[72]//MatrixForm=",ExpressionUUID->"7d5ca7b5-6f04-4695-9311-\
+28454be11a37"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Einstein equations", "Section",
+ CellChangeTimes->{{3.6241865270889*^9, 3.624186530321651*^9}, {
+  3.6242544291776247`*^9, 3.624254434481558*^9}},
+ FontSize->24,ExpressionUUID->"e091c613-7af2-40d7-8320-6a2bd755498a"],
+
+Cell[CellGroupData[{
+
+Cell["i-j (i\[NotEqual]j) component", "Subsection",
+ CellChangeTimes->{{3.624188471483343*^9, 3.624188513341695*^9}, {
+  3.62425621611203*^9, 3.624256216632184*^9}, {3.624256351768845*^9, 
+  3.624256362808329*^9}},ExpressionUUID->"945cea22-0b9b-4250-a111-\
+7f8ebd9bebb0"],
+
+Cell["\<\
+As an example we compute the 1-2 component of the Einstein equation. \
+Technically, we defined \[Pi]G into a single variable because they always \
+come together.\
+\>", "Text",
+ CellChangeTimes->{{3.624189261256394*^9, 3.624189276525251*^9}, {
+  3.624256281999364*^9, 3.6242563040706987`*^9}, {3.62425638566818*^9, 
+  3.624256394684865*^9}},ExpressionUUID->"9037492e-bf68-4699-89a0-\
+cad5eb895b09"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"eq12", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"einstein", "\[LeftDoubleBracket]", 
+     RowBox[{"1", ",", "2"}], "\[RightDoubleBracket]"}], "-", 
+    RowBox[{"8", "\[Pi]G", " ", 
+     RowBox[{"stress", "\[LeftDoubleBracket]", 
+      RowBox[{"1", ",", "2"}], "\[RightDoubleBracket]"}]}]}], "//", 
+   "simp"}]}]], "Input",
+ CellChangeTimes->{{3.624188496944086*^9, 3.6241885188016233`*^9}},
+ CellLabel->"In[73]:=",ExpressionUUID->"60cb0132-8143-4d50-9c6b-190b9b3abedd"],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{{3.62418850048279*^9, 3.624188519674192*^9}, 
+   3.624189244963674*^9, 3.624189524764676*^9, 3.6242574229623117`*^9, 
+   3.8200245894732437`*^9, 3.820024622574952*^9, 3.8200246663561373`*^9, 
+   3.820572544711081*^9, 3.863282738122353*^9, 3.863283123393317*^9},
+ CellLabel->"Out[73]=",ExpressionUUID->"978f1a21-f45a-44b5-b847-d484ad92fdb4"]
+}, Open  ]],
+
+Cell["\<\
+For vanishing anisotropic stress, we thus have \[CapitalPsi] = \[CapitalPhi]. \
+Let us impose this condition to eliminate \[CapitalPsi]  from now on.\
+\>", "Text",
+ CellChangeTimes->{{3.624188533600698*^9, 3.62418857310087*^9}, 
+   3.624256415982588*^9, {3.863282419284109*^9, 
+   3.863282455258902*^9}},ExpressionUUID->"fcc016da-c914-4bed-91d2-\
+0965a8ae958d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[CapitalPsi]", "=", "\[CapitalPhi]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.624188574677374*^9, 3.6241885872107983`*^9}},
+ CellLabel->"In[74]:=",ExpressionUUID->"a1cd4973-5ebf-4796-aa14-c7b91b5dfa41"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["0-0 component", "Subsection",
+ CellChangeTimes->{{3.624187181008304*^9, 3.624187199337234*^9}, {
+  3.624256226000255*^9, 
+  3.624256255666263*^9}},ExpressionUUID->"f9394fc8-8bd2-4049-9b6e-\
+90ee7015ca01"],
+
+Cell["\<\
+Recall that the 0-0 component is the 4-4 component in the code.\
+\>", "Text",
+ CellChangeTimes->{{3.624256229900219*^9, 3.6242562515428247`*^9}, {
+  3.624256426807247*^9, 
+  3.624256430390893*^9}},ExpressionUUID->"a17b1445-24fa-4997-918e-\
+b056537af7fc"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"eq00", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"einstein", "\[LeftDoubleBracket]", 
+     RowBox[{"4", ",", "4"}], "\[RightDoubleBracket]"}], "-", 
+    RowBox[{"8", "\[Pi]G", " ", 
+     RowBox[{"stress", "\[LeftDoubleBracket]", 
+      RowBox[{"4", ",", "4"}], "\[RightDoubleBracket]"}]}]}], "//", 
+   "simp"}]}]], "Input",
+ CellChangeTimes->{{3.6241867055120363`*^9, 3.62418671175142*^9}, {
+  3.62418691687602*^9, 3.6241869628066273`*^9}, {3.624187355366933*^9, 
+  3.624187356281582*^9}},
+ CellLabel->"In[75]:=",ExpressionUUID->"e2786380-8014-44fa-9ae5-71aa54996cac"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"3", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["\[ScriptCapitalH]",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"]}], "-", 
+  RowBox[{"8", " ", "\[Pi]G", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"], " ", 
+   TagBox[
+    StyleBox["\[Rho]0",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False]}], "+", 
+  RowBox[{"2", " ", "\[Epsilon]", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "4"}], " ", "\[Pi]G", " ", 
+      SuperscriptBox[
+       TagBox[
+        StyleBox["a",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False], "2"], " ", 
+      TagBox[
+       StyleBox["\[Rho]0",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        TagBox[
+         StyleBox["\[Delta]",
+          LineColor->RGBColor[1, 0, 0],
+          FrontFaceColor->RGBColor[1, 0, 0],
+          BackFaceColor->RGBColor[1, 0, 0],
+          GraphicsColor->RGBColor[1, 0, 0],
+          FontColor->RGBColor[1, 0, 0]],
+         "GREFX",
+         Selectable->False], "+", 
+        RowBox[{"2", " ", 
+         TagBox[
+          StyleBox["\[CapitalPhi]",
+           LineColor->RGBColor[1, 0, 0],
+           FrontFaceColor->RGBColor[1, 0, 0],
+           BackFaceColor->RGBColor[1, 0, 0],
+           GraphicsColor->RGBColor[1, 0, 0],
+           FontColor->RGBColor[1, 0, 0]],
+          "GREFX",
+          Selectable->False]}]}], ")"}]}], "-", 
+     RowBox[{"3", " ", 
+      TagBox[
+       StyleBox["\[ScriptCapitalH]",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], " ", 
+      RowBox[{"(", 
+       TagBox[GridBox[{
+          {"\[PartialD]", 
+           StyleBox[GridBox[{
+              {""},
+              {"\[Eta]"}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.]}, 
+                 Offset[0.27999999999999997`]}, "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.]}, 
+                 Offset[0.2]}},
+             Selectable->True],
+            FontSize->10], GridBox[{
+             {
+              TagBox[
+               StyleBox["\[CapitalPhi]",
+                LineColor->RGBColor[1, 0, 0],
+                FrontFaceColor->RGBColor[1, 0, 0],
+                BackFaceColor->RGBColor[1, 0, 0],
+                GraphicsColor->RGBColor[1, 0, 0],
+                FontColor->RGBColor[1, 0, 0]],
+               "GREFX",
+               Selectable->False]}
+            },
+            Selectable->True]}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.]}, 
+             Offset[0.2]}}],
+        "GRED",
+        Selectable->False], ")"}]}], "+", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {"2"},
+            {"z"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False], "+", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {"2"},
+            {"y"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False], "+", 
+     TagBox[GridBox[{
+        {"\[PartialD]", 
+         StyleBox[GridBox[{
+            {"2"},
+            {"x"}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.]}, 
+               Offset[0.27999999999999997`]}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.]}, 
+               Offset[0.2]}},
+           Selectable->True],
+          FontSize->10], GridBox[{
+           {
+            TagBox[
+             StyleBox["\[CapitalPhi]",
+              LineColor->RGBColor[1, 0, 0],
+              FrontFaceColor->RGBColor[1, 0, 0],
+              BackFaceColor->RGBColor[1, 0, 0],
+              GraphicsColor->RGBColor[1, 0, 0],
+              FontColor->RGBColor[1, 0, 0]],
+             "GREFX",
+             Selectable->False]}
+          },
+          Selectable->True]}
+       },
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.]}, 
+           Offset[0.2]}}],
+      "GRED",
+      Selectable->False]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.624186871530175*^9, 3.6241869631126547`*^9}, 
+   3.624187357084629*^9, 3.62418753228996*^9, 3.624188053001437*^9, 
+   3.6241881229437857`*^9, 3.624188208265546*^9, 3.624188334711423*^9, 
+   3.6241885894925947`*^9, 3.6241892449983263`*^9, 3.6241895248014793`*^9, 
+   3.624257423003683*^9, 3.820024589515031*^9, 3.820024622602982*^9, 
+   3.820024666380829*^9, 3.820572544746552*^9, 3.8632827381446543`*^9, 
+   3.863283123423869*^9},
+ CellLabel->"Out[75]=",ExpressionUUID->"5ef9eec2-bc74-40f3-ac66-e1b013966aed"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The zeroth order part is the ",
+ StyleBox["Friedmann equation",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0., 0., 0.]]
+}], "Text",
+ CellChangeTimes->{{3.624187348980465*^9, 3.624187352614162*^9}, {
+  3.62425646090878*^9, 3.6242564684851627`*^9}, {3.624256517023841*^9, 
+  3.624256525824238*^9}, {3.863282553950842*^9, 
+  3.863282556943531*^9}},ExpressionUUID->"500fbfde-d652-4d45-bc24-\
+6970cce2589d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Coefficient", "[", 
+  RowBox[{"eq00", ",", "\[Epsilon]", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.624187358832944*^9, 3.624187364962901*^9}},
+ CellLabel->"In[76]:=",ExpressionUUID->"2e400f4a-1f49-4622-9d6d-0a589d79d40f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"3", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["\[ScriptCapitalH]",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"]}], "-", 
+  RowBox[{"8", " ", "\[Pi]G", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"], " ", 
+   TagBox[
+    StyleBox["\[Rho]0",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False]}]}]], "Output",
+ CellChangeTimes->{3.62418736544248*^9, 3.6241875322936993`*^9, 
+  3.6241880530219707`*^9, 3.624188122966337*^9, 3.624188208285995*^9, 
+  3.6241883347294188`*^9, 3.624188594496641*^9, 3.6241892450254173`*^9, 
+  3.6241895248298807`*^9, 3.62425742304235*^9, 3.82002458954193*^9, 
+  3.8200246226257973`*^9, 3.820024666388785*^9, 3.820572544770609*^9, 
+  3.8632827381611633`*^9, 3.8632831234526653`*^9},
+ CellLabel->"Out[76]=",ExpressionUUID->"43f91a26-eaf5-4304-a2ce-b3e38a8eb5b8"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The linear order part is the relativistic ",
+ StyleBox["Poisson equation",
+  FontWeight->"Bold"]
+}], "Text",
+ CellChangeTimes->{{3.624187416641555*^9, 3.6241874214914923`*^9}, {
+  3.624256473213234*^9, 3.624256482149596*^9}, {3.820026117727487*^9, 
+  3.820026132025313*^9}},ExpressionUUID->"347f7a24-f245-438e-8d5d-\
+d47c024e7b2a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"Coefficient", "[", 
+     RowBox[{"eq00", ",", "\[Epsilon]", ",", "1"}], "]"}]}], "/", "2"}], "//",
+   "Expand"}]], "Input",
+ CellChangeTimes->{{3.624187369726963*^9, 3.624187369771791*^9}, {
+   3.6241874053948803`*^9, 3.6241874108566933`*^9}, 3.6241889879378433`*^9},
+ CellLabel->"In[77]:=",ExpressionUUID->"259079dd-bbb6-4c68-9a51-eb14997b062e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"4", " ", "\[Pi]G", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"], " ", 
+   TagBox[
+    StyleBox["\[Delta]",
+     LineColor->RGBColor[1, 0, 0],
+     FrontFaceColor->RGBColor[1, 0, 0],
+     BackFaceColor->RGBColor[1, 0, 0],
+     GraphicsColor->RGBColor[1, 0, 0],
+     FontColor->RGBColor[1, 0, 0]],
+    "GREFX",
+    Selectable->False], " ", 
+   TagBox[
+    StyleBox["\[Rho]0",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False]}], "+", 
+  RowBox[{"8", " ", "\[Pi]G", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"], " ", 
+   TagBox[
+    StyleBox["\[Rho]0",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False], " ", 
+   TagBox[
+    StyleBox["\[CapitalPhi]",
+     LineColor->RGBColor[1, 0, 0],
+     FrontFaceColor->RGBColor[1, 0, 0],
+     BackFaceColor->RGBColor[1, 0, 0],
+     GraphicsColor->RGBColor[1, 0, 0],
+     FontColor->RGBColor[1, 0, 0]],
+    "GREFX",
+    Selectable->False]}], "+", 
+  RowBox[{"3", " ", 
+   TagBox[
+    StyleBox["\[ScriptCapitalH]",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False], " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {"\[PartialD]", 
+        StyleBox[GridBox[{
+           {""},
+           {"\[Eta]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}},
+          Selectable->True],
+         FontSize->10], GridBox[{
+          {
+           TagBox[
+            StyleBox["\[CapitalPhi]",
+             LineColor->RGBColor[1, 0, 0],
+             FrontFaceColor->RGBColor[1, 0, 0],
+             BackFaceColor->RGBColor[1, 0, 0],
+             GraphicsColor->RGBColor[1, 0, 0],
+             FontColor->RGBColor[1, 0, 0]],
+            "GREFX",
+            Selectable->False]}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}}],
+     "GRED",
+     Selectable->False], ")"}]}], "-", 
+  TagBox[GridBox[{
+     {"\[PartialD]", 
+      StyleBox[GridBox[{
+         {"2"},
+         {"z"}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}},
+        Selectable->True],
+       FontSize->10], GridBox[{
+        {
+         TagBox[
+          StyleBox["\[CapitalPhi]",
+           LineColor->RGBColor[1, 0, 0],
+           FrontFaceColor->RGBColor[1, 0, 0],
+           BackFaceColor->RGBColor[1, 0, 0],
+           GraphicsColor->RGBColor[1, 0, 0],
+           FontColor->RGBColor[1, 0, 0]],
+          "GREFX",
+          Selectable->False]}
+       },
+       Selectable->True]}
+    },
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.]}, 
+        Offset[0.2]}}],
+   "GRED",
+   Selectable->False], "-", 
+  TagBox[GridBox[{
+     {"\[PartialD]", 
+      StyleBox[GridBox[{
+         {"2"},
+         {"y"}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}},
+        Selectable->True],
+       FontSize->10], GridBox[{
+        {
+         TagBox[
+          StyleBox["\[CapitalPhi]",
+           LineColor->RGBColor[1, 0, 0],
+           FrontFaceColor->RGBColor[1, 0, 0],
+           BackFaceColor->RGBColor[1, 0, 0],
+           GraphicsColor->RGBColor[1, 0, 0],
+           FontColor->RGBColor[1, 0, 0]],
+          "GREFX",
+          Selectable->False]}
+       },
+       Selectable->True]}
+    },
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.]}, 
+        Offset[0.2]}}],
+   "GRED",
+   Selectable->False], "-", 
+  TagBox[GridBox[{
+     {"\[PartialD]", 
+      StyleBox[GridBox[{
+         {"2"},
+         {"x"}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}},
+        Selectable->True],
+       FontSize->10], GridBox[{
+        {
+         TagBox[
+          StyleBox["\[CapitalPhi]",
+           LineColor->RGBColor[1, 0, 0],
+           FrontFaceColor->RGBColor[1, 0, 0],
+           BackFaceColor->RGBColor[1, 0, 0],
+           GraphicsColor->RGBColor[1, 0, 0],
+           FontColor->RGBColor[1, 0, 0]],
+          "GREFX",
+          Selectable->False]}
+       },
+       Selectable->True]}
+    },
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.]}, 
+        Offset[0.2]}}],
+   "GRED",
+   Selectable->False]}]], "Output",
+ CellChangeTimes->{
+  3.6241873700324183`*^9, {3.6241874066853943`*^9, 3.624187411127098*^9}, 
+   3.624187532323414*^9, 3.624188053043579*^9, 3.62418812298941*^9, 
+   3.624188208307922*^9, 3.624188334748374*^9, 3.624188595499316*^9, 
+   3.624188988240602*^9, 3.624189245050436*^9, 3.6241895248569183`*^9, 
+   3.6242574230757008`*^9, 3.820024589558967*^9, 3.820024622638578*^9, 
+   3.820024666414427*^9, 3.820572544777561*^9, 3.8632827381678257`*^9, 
+   3.86328312346284*^9},
+ CellLabel->"Out[77]=",ExpressionUUID->"4a3fda19-91ab-4f4e-84ab-c9e0e432a9c1"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["0-i component", "Subsection",
+ CellChangeTimes->{{3.624187181008304*^9, 3.624187209826433*^9}, {
+  3.624188766834941*^9, 3.624188779300316*^9}, {3.624256647636793*^9, 
+  3.624256649812414*^9}},ExpressionUUID->"0ad00157-05d4-4096-b90f-\
+e3dfb0f58ca0"],
+
+Cell["\<\
+Recall that the 0-i component is the 4-i component in the code. As an \
+example, we show the 0-1 component:\
+\>", "Text",
+ CellChangeTimes->{{3.624256604154892*^9, 
+  3.624256643404249*^9}},ExpressionUUID->"04db4f6c-7493-4852-be2c-\
+94abf3d27b23"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"einstein", "\[LeftDoubleBracket]", 
+    RowBox[{"4", ",", "1"}], "\[RightDoubleBracket]"}], "-", 
+   RowBox[{"8", "\[Pi]G", " ", 
+    RowBox[{"stress", "\[LeftDoubleBracket]", 
+     RowBox[{"4", ",", "1"}], "\[RightDoubleBracket]"}]}]}], "//", 
+  "simp"}]], "Input",
+ CellChangeTimes->{{3.6241869910759172`*^9, 3.624187000028595*^9}, {
+  3.6241887821606827`*^9, 3.62418878808368*^9}},
+ CellLabel->"In[78]:=",ExpressionUUID->"9f86fd3b-77ce-4722-a2df-3da2a8c29f0e"],
+
+Cell[BoxData[
+ RowBox[{"2", " ", "\[Epsilon]", " ", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"4", " ", "\[Pi]G", " ", 
+     SuperscriptBox[
+      TagBox[
+       StyleBox["a",
+        LineColor->RGBColor[0.5, 0, 0.5],
+        FrontFaceColor->RGBColor[0.5, 0, 0.5],
+        BackFaceColor->RGBColor[0.5, 0, 0.5],
+        GraphicsColor->RGBColor[0.5, 0, 0.5],
+        FontColor->RGBColor[0.5, 0, 0.5]],
+       "GREFX0",
+       Selectable->False], "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       TagBox[
+        StyleBox["P0",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False], "+", 
+       TagBox[
+        StyleBox["\[Rho]0",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False]}], ")"}], " ", 
+     TagBox[
+      StyleBox[
+       RowBox[{"v", "[", "1", "]"}],
+       LineColor->RGBColor[1, 0, 0],
+       FrontFaceColor->RGBColor[1, 0, 0],
+       BackFaceColor->RGBColor[1, 0, 0],
+       GraphicsColor->RGBColor[1, 0, 0],
+       FontColor->RGBColor[1, 0, 0]],
+      "GREFX",
+      Selectable->False]}], "+", 
+    RowBox[{
+     TagBox[
+      StyleBox["\[ScriptCapitalH]",
+       LineColor->RGBColor[0.5, 0, 0.5],
+       FrontFaceColor->RGBColor[0.5, 0, 0.5],
+       BackFaceColor->RGBColor[0.5, 0, 0.5],
+       GraphicsColor->RGBColor[0.5, 0, 0.5],
+       FontColor->RGBColor[0.5, 0, 0.5]],
+      "GREFX0",
+      Selectable->False], " ", 
+     RowBox[{"(", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {""},
+             {"x"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False], ")"}]}], "+", 
+    TagBox[GridBox[{
+       {"\[PartialD]", 
+        StyleBox[GridBox[{
+           {"", ""},
+           {"x", "\[Eta]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}},
+          Selectable->True],
+         FontSize->10], GridBox[{
+          {
+           TagBox[
+            StyleBox["\[CapitalPhi]",
+             LineColor->RGBColor[1, 0, 0],
+             FrontFaceColor->RGBColor[1, 0, 0],
+             BackFaceColor->RGBColor[1, 0, 0],
+             GraphicsColor->RGBColor[1, 0, 0],
+             FontColor->RGBColor[1, 0, 0]],
+            "GREFX",
+            Selectable->False]}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}}],
+     "GRED",
+     Selectable->False]}], ")"}]}]], "Output",
+ CellChangeTimes->{3.6241870006395473`*^9, 3.6241875323603*^9, 
+  3.624188053071876*^9, 3.6241881230187674`*^9, 3.6241882083375673`*^9, 
+  3.624188334768141*^9, 3.6241886537386827`*^9, 3.6241887883043957`*^9, 
+  3.6241892450787497`*^9, 3.624189524888254*^9, 3.624257423096711*^9, 
+  3.820024589590808*^9, 3.8200246226634207`*^9, 3.82002466642281*^9, 
+  3.820572544803479*^9, 3.86328273818466*^9, 3.8632831234917717`*^9},
+ CellLabel->"Out[78]=",ExpressionUUID->"9e615a99-528b-42a0-9810-702598207d45"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Trace of the i-j component", "Subsection",
+ CellChangeTimes->{{3.624187214161621*^9, 3.6241872256210403`*^9}, {
+   3.624188465490252*^9, 3.624188466942367*^9}, 
+   3.624256771688601*^9},ExpressionUUID->"cc7b1456-386b-4fef-958f-\
+d6995ca98421"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"eqii", "=", 
+  RowBox[{
+   RowBox[{"Sum", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"inversemetric", "\[LeftDoubleBracket]", 
+        RowBox[{"\[Mu]", ",", "i"}], "\[RightDoubleBracket]"}], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"einstein", "\[LeftDoubleBracket]", 
+          RowBox[{"\[Mu]", ",", "i"}], "\[RightDoubleBracket]"}], "-", 
+         RowBox[{"8", "\[Pi]G", " ", 
+          RowBox[{"stress", "\[LeftDoubleBracket]", 
+           RowBox[{"\[Mu]", ",", "i"}], "\[RightDoubleBracket]"}]}]}], 
+        ")"}]}], "+", 
+      SuperscriptBox[
+       RowBox[{"O", "[", "\[Epsilon]", "]"}], "2"]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Mu]", ",", "1", ",", "n"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}], "//", "simp"}]}]], "Input",
+ CellChangeTimes->{{3.624187234344589*^9, 3.624187246742239*^9}, {
+   3.624188837420034*^9, 3.62418892198422*^9}, {3.624257400490251*^9, 
+   3.624257411114912*^9}, 3.624257446392296*^9},
+ CellLabel->"In[79]:=",ExpressionUUID->"d006410a-a17f-4f8a-9985-97326780d962"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"3", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"8", " ", "\[Pi]G", " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       TagBox[
+        StyleBox["P0",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False]}], "+", 
+      SuperscriptBox[
+       TagBox[
+        StyleBox["\[ScriptCapitalH]",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False], "2"], "+", 
+      RowBox[{"2", " ", 
+       TagBox[
+        StyleBox[
+         SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+          MultilineFunction->None],
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False]}]}], ")"}]}], 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"]], "+", 
+  FractionBox[
+   RowBox[{"6", " ", "\[Epsilon]", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"4", " ", "\[Pi]G", " ", 
+       SuperscriptBox[
+        TagBox[
+         StyleBox["a",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       TagBox[
+        StyleBox["\[Delta]P",
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], "-", 
+      RowBox[{
+       SuperscriptBox[
+        TagBox[
+         StyleBox["\[ScriptCapitalH]",
+          LineColor->RGBColor[0.5, 0, 0.5],
+          FrontFaceColor->RGBColor[0.5, 0, 0.5],
+          BackFaceColor->RGBColor[0.5, 0, 0.5],
+          GraphicsColor->RGBColor[0.5, 0, 0.5],
+          FontColor->RGBColor[0.5, 0, 0.5]],
+         "GREFX0",
+         Selectable->False], "2"], " ", 
+       TagBox[
+        StyleBox["\[CapitalPhi]",
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False]}], "-", 
+      RowBox[{"2", " ", 
+       TagBox[
+        StyleBox["\[CapitalPhi]",
+         LineColor->RGBColor[1, 0, 0],
+         FrontFaceColor->RGBColor[1, 0, 0],
+         BackFaceColor->RGBColor[1, 0, 0],
+         GraphicsColor->RGBColor[1, 0, 0],
+         FontColor->RGBColor[1, 0, 0]],
+        "GREFX",
+        Selectable->False], " ", 
+       TagBox[
+        StyleBox[
+         SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+          MultilineFunction->None],
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False]}], "-", 
+      RowBox[{"3", " ", 
+       TagBox[
+        StyleBox["\[ScriptCapitalH]",
+         LineColor->RGBColor[0.5, 0, 0.5],
+         FrontFaceColor->RGBColor[0.5, 0, 0.5],
+         BackFaceColor->RGBColor[0.5, 0, 0.5],
+         GraphicsColor->RGBColor[0.5, 0, 0.5],
+         FontColor->RGBColor[0.5, 0, 0.5]],
+        "GREFX0",
+        Selectable->False], " ", 
+       RowBox[{"(", 
+        TagBox[GridBox[{
+           {"\[PartialD]", 
+            StyleBox[GridBox[{
+               {""},
+               {"\[Eta]"}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.]}, 
+                  Offset[0.27999999999999997`]}, "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.]}, 
+                  Offset[0.2]}},
+              Selectable->True],
+             FontSize->10], GridBox[{
+              {
+               TagBox[
+                StyleBox["\[CapitalPhi]",
+                 LineColor->RGBColor[1, 0, 0],
+                 FrontFaceColor->RGBColor[1, 0, 0],
+                 BackFaceColor->RGBColor[1, 0, 0],
+                 GraphicsColor->RGBColor[1, 0, 0],
+                 FontColor->RGBColor[1, 0, 0]],
+                "GREFX",
+                Selectable->False]}
+             },
+             Selectable->True]}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}}],
+         "GRED",
+         Selectable->False], ")"}]}], "-", 
+      TagBox[GridBox[{
+         {"\[PartialD]", 
+          StyleBox[GridBox[{
+             {"2"},
+             {"\[Eta]"}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.]}, 
+                Offset[0.2]}},
+            Selectable->True],
+           FontSize->10], GridBox[{
+            {
+             TagBox[
+              StyleBox["\[CapitalPhi]",
+               LineColor->RGBColor[1, 0, 0],
+               FrontFaceColor->RGBColor[1, 0, 0],
+               BackFaceColor->RGBColor[1, 0, 0],
+               GraphicsColor->RGBColor[1, 0, 0],
+               FontColor->RGBColor[1, 0, 0]],
+              "GREFX",
+              Selectable->False]}
+           },
+           Selectable->True]}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}}],
+       "GRED",
+       Selectable->False]}], ")"}]}], 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"]]}]], "Output",
+ CellChangeTimes->{
+  3.624187246987895*^9, 3.624187532414209*^9, 3.624188053120051*^9, 
+   3.624188123063208*^9, 3.624188208383683*^9, 3.624188334801816*^9, {
+   3.6241888808840017`*^9, 3.624188922672612*^9}, 3.624189245116015*^9, 
+   3.624189524938342*^9, {3.624257423146338*^9, 3.624257448536345*^9}, 
+   3.8200245896207943`*^9, 3.820024622687497*^9, 3.8200246664447803`*^9, 
+   3.820572544839054*^9, 3.863282738211499*^9, 3.863283123503951*^9},
+ CellLabel->"Out[79]=",ExpressionUUID->"d0ad8925-cc9a-439b-829e-1f805065affd"]
+}, Open  ]],
+
+Cell["The zeroth order part is", "Text",
+ CellChangeTimes->{{3.624187348980465*^9, 3.624187352614162*^9}, {
+  3.624256816617457*^9, 
+  3.62425682087364*^9}},ExpressionUUID->"497e9b11-76fc-4d49-aae1-\
+046b1a9c88cf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Coefficient", "[", 
+    RowBox[{"eqii", ",", "\[Epsilon]", ",", "0"}], "]"}], "*", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"a", "[", "\[Eta]", "]"}], "2"], "/", "3"}]}], "//", 
+  "Expand"}]], "Input",
+ CellChangeTimes->{{3.624187358832944*^9, 3.624187364962901*^9}, {
+  3.62418894548829*^9, 3.62418894602262*^9}, {3.6241890051855917`*^9, 
+  3.624189018822414*^9}, {3.863283106804563*^9, 3.8632831101745663`*^9}},
+ CellLabel->"In[80]:=",ExpressionUUID->"1c8a70c6-d9b4-4dd8-9a30-9059855960cc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"8", " ", "\[Pi]G", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"], " ", 
+   TagBox[
+    StyleBox["P0",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False]}], "+", 
+  SuperscriptBox[
+   TagBox[
+    StyleBox["\[ScriptCapitalH]",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False], "2"], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    StyleBox[
+     SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+      MultilineFunction->None],
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False]}]}]], "Output",
+ CellChangeTimes->{
+  3.62418736544248*^9, 3.6241875322936993`*^9, 3.6241880530219707`*^9, 
+   3.624188122966337*^9, 3.624188208285995*^9, 3.6241883347294188`*^9, 
+   3.624188594496641*^9, 3.62418894631056*^9, {3.624189009945858*^9, 
+   3.624189019063703*^9}, 3.624189245140683*^9, 3.624189524964697*^9, {
+   3.624257423194017*^9, 3.624257451035706*^9}, 3.820024589630808*^9, 
+   3.820024622694886*^9, 3.820024666452743*^9, 3.820572544847289*^9, 
+   3.863282738218439*^9, 3.863283123535223*^9},
+ CellLabel->"Out[80]=",ExpressionUUID->"6c6ab300-bfdf-467e-9479-ade235f090b6"]
+}, Open  ]],
+
+Cell["The linear order part is", "Text",
+ CellChangeTimes->{{3.624187416641555*^9, 3.6241874214914923`*^9}, {
+  3.624256825745932*^9, 
+  3.6242568287298594`*^9}},ExpressionUUID->"e3c4db46-63a9-4cb3-8126-\
+8f627feeac27"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"Coefficient", "[", 
+     RowBox[{"eqii", ",", "\[Epsilon]", ",", "1"}], "]"}]}], "*", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"a", "[", "\[Eta]", "]"}], "2"], "/", "6"}]}], "//", 
+  "Expand"}]], "Input",
+ CellChangeTimes->{{3.624187369726963*^9, 3.624187369771791*^9}, {
+  3.6241874053948803`*^9, 3.6241874108566933`*^9}, {3.624188948453475*^9, 
+  3.624188979794598*^9}, {3.863283113049817*^9, 3.8632831169703283`*^9}},
+ CellLabel->"In[81]:=",ExpressionUUID->"adf890e7-d906-4f02-854d-2e160c046b92"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", "4"}], " ", "\[Pi]G", " ", 
+   SuperscriptBox[
+    TagBox[
+     StyleBox["a",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"], " ", 
+   TagBox[
+    StyleBox["\[Delta]P",
+     LineColor->RGBColor[1, 0, 0],
+     FrontFaceColor->RGBColor[1, 0, 0],
+     BackFaceColor->RGBColor[1, 0, 0],
+     GraphicsColor->RGBColor[1, 0, 0],
+     FontColor->RGBColor[1, 0, 0]],
+    "GREFX",
+    Selectable->False]}], "+", 
+  RowBox[{
+   SuperscriptBox[
+    TagBox[
+     StyleBox["\[ScriptCapitalH]",
+      LineColor->RGBColor[0.5, 0, 0.5],
+      FrontFaceColor->RGBColor[0.5, 0, 0.5],
+      BackFaceColor->RGBColor[0.5, 0, 0.5],
+      GraphicsColor->RGBColor[0.5, 0, 0.5],
+      FontColor->RGBColor[0.5, 0, 0.5]],
+     "GREFX0",
+     Selectable->False], "2"], " ", 
+   TagBox[
+    StyleBox["\[CapitalPhi]",
+     LineColor->RGBColor[1, 0, 0],
+     FrontFaceColor->RGBColor[1, 0, 0],
+     BackFaceColor->RGBColor[1, 0, 0],
+     GraphicsColor->RGBColor[1, 0, 0],
+     FontColor->RGBColor[1, 0, 0]],
+    "GREFX",
+    Selectable->False]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    StyleBox["\[CapitalPhi]",
+     LineColor->RGBColor[1, 0, 0],
+     FrontFaceColor->RGBColor[1, 0, 0],
+     BackFaceColor->RGBColor[1, 0, 0],
+     GraphicsColor->RGBColor[1, 0, 0],
+     FontColor->RGBColor[1, 0, 0]],
+    "GREFX",
+    Selectable->False], " ", 
+   TagBox[
+    StyleBox[
+     SuperscriptBox["\[ScriptCapitalH]", "\[Prime]",
+      MultilineFunction->None],
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False]}], "+", 
+  RowBox[{"3", " ", 
+   TagBox[
+    StyleBox["\[ScriptCapitalH]",
+     LineColor->RGBColor[0.5, 0, 0.5],
+     FrontFaceColor->RGBColor[0.5, 0, 0.5],
+     BackFaceColor->RGBColor[0.5, 0, 0.5],
+     GraphicsColor->RGBColor[0.5, 0, 0.5],
+     FontColor->RGBColor[0.5, 0, 0.5]],
+    "GREFX0",
+    Selectable->False], " ", 
+   RowBox[{"(", 
+    TagBox[GridBox[{
+       {"\[PartialD]", 
+        StyleBox[GridBox[{
+           {""},
+           {"\[Eta]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.]}, 
+              Offset[0.2]}},
+          Selectable->True],
+         FontSize->10], GridBox[{
+          {
+           TagBox[
+            StyleBox["\[CapitalPhi]",
+             LineColor->RGBColor[1, 0, 0],
+             FrontFaceColor->RGBColor[1, 0, 0],
+             BackFaceColor->RGBColor[1, 0, 0],
+             GraphicsColor->RGBColor[1, 0, 0],
+             FontColor->RGBColor[1, 0, 0]],
+            "GREFX",
+            Selectable->False]}
+         },
+         Selectable->True]}
+      },
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.]}, 
+          Offset[0.27999999999999997`]}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.]}, 
+          Offset[0.2]}}],
+     "GRED",
+     Selectable->False], ")"}]}], "+", 
+  TagBox[GridBox[{
+     {"\[PartialD]", 
+      StyleBox[GridBox[{
+         {"2"},
+         {"\[Eta]"}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.]}, 
+            Offset[0.2]}},
+        Selectable->True],
+       FontSize->10], GridBox[{
+        {
+         TagBox[
+          StyleBox["\[CapitalPhi]",
+           LineColor->RGBColor[1, 0, 0],
+           FrontFaceColor->RGBColor[1, 0, 0],
+           BackFaceColor->RGBColor[1, 0, 0],
+           GraphicsColor->RGBColor[1, 0, 0],
+           FontColor->RGBColor[1, 0, 0]],
+          "GREFX",
+          Selectable->False]}
+       },
+       Selectable->True]}
+    },
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.]}, 
+        Offset[0.2]}}],
+   "GRED",
+   Selectable->False]}]], "Output",
+ CellChangeTimes->{
+  3.6241873700324183`*^9, {3.6241874066853943`*^9, 3.624187411127098*^9}, 
+   3.624187532323414*^9, 3.624188053043579*^9, 3.62418812298941*^9, 
+   3.624188208307922*^9, 3.624188334748374*^9, 3.624188595499316*^9, {
+   3.6241889500665073`*^9, 3.6241889800762863`*^9}, 3.6241892451641808`*^9, 
+   3.6241895249896183`*^9, 3.624257423225222*^9, 3.624257454064382*^9, 
+   3.820024589660264*^9, 3.820024622715768*^9, 3.820024666478448*^9, 
+   3.820572544876115*^9, 3.863282738234536*^9, 3.863283123544092*^9},
+ CellLabel->"Out[81]=",ExpressionUUID->"7941b05b-b3d3-400d-9f2a-bbe570a00d10"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{1204, 728},
+WindowMargins->{{106, Automatic}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (July 9, 2021)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]]}, Visible -> False, 
+  FrontEndVersion -> "12.3 for Mac OS X x86 (64-bit) (July 9, 2021)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"2086e1a2-a569-445f-acdc-d0da1a9be6be"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 458, 10, 143, "Title",ExpressionUUID->"4f1253ae-0246-4172-adea-3298817d7d2f"],
+Cell[1041, 34, 459, 10, 78, "Subtitle",ExpressionUUID->"53056adb-41a3-4bb1-9471-a2f77193d5b6"],
+Cell[CellGroupData[{
+Cell[1525, 48, 285, 6, 64, "Section",ExpressionUUID->"de3320f2-6da4-4406-8983-3e846aee03a3"],
+Cell[1813, 56, 426, 7, 69, "Text",ExpressionUUID->"b4883caf-5aad-4a10-b3c7-1fd20f1993a1"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[2276, 68, 386, 9, 59, "Section",ExpressionUUID->"556e68db-10ab-4eb2-b6f2-8ee48e438518"],
+Cell[CellGroupData[{
+Cell[2687, 81, 203, 4, 67, "Subsection",ExpressionUUID->"6e421091-7c11-4bf4-8abe-d41931f310c2"],
+Cell[2893, 87, 590, 13, 73, "Text",ExpressionUUID->"ecc31d12-a612-416b-ba2a-8b932ae765ed"],
+Cell[3486, 102, 570, 14, 64, "Input",ExpressionUUID->"8dccb880-754c-46a6-9450-4990aba1d2c5"],
+Cell[4059, 118, 546, 11, 44, "Text",ExpressionUUID->"d819dd5f-36c8-4c03-9f01-b617d2a9a57a"],
+Cell[4608, 131, 2136, 51, 143, "Input",ExpressionUUID->"9ae33185-af3d-4360-baa0-0d2919f14ad0"],
+Cell[6747, 184, 880, 18, 66, "Text",ExpressionUUID->"7b239b6e-d962-460b-baaa-aa0be07d3603"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7664, 207, 179, 3, 67, "Subsection",ExpressionUUID->"b65936af-d7d6-4ee0-90fe-58cbad6fad9d"],
+Cell[7846, 212, 196, 3, 44, "Text",ExpressionUUID->"a1b70278-7d84-46a7-9f11-68720f462043"],
+Cell[8045, 217, 328, 5, 44, "Text",ExpressionUUID->"b5e7a067-e067-4a24-954a-c804892fdff8"],
+Cell[8376, 224, 1316, 30, 116, "Input",ExpressionUUID->"a4cbbcaa-9490-411e-a8aa-0ecf1803d8ed"],
+Cell[9695, 256, 2757, 64, 453, "Text",ExpressionUUID->"b238bce8-f2a0-4149-9d6a-24d411aac499"],
+Cell[12455, 322, 9349, 243, 610, "Input",ExpressionUUID->"b9c061ff-a77f-4777-be70-9c69f16a89ab"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[21853, 571, 273, 4, 59, "Section",ExpressionUUID->"8ba9beda-f7dd-46c3-bfc1-c9d24084ee31"],
+Cell[22129, 577, 2898, 85, 234, "Text",ExpressionUUID->"e90cba05-97ca-4e80-bda2-a3051bdc3560"],
+Cell[CellGroupData[{
+Cell[25052, 666, 208, 4, 67, "Subsection",ExpressionUUID->"99194f23-d0f5-402a-9c15-7156c3788c4e"],
+Cell[25263, 672, 7064, 178, 454, "Input",ExpressionUUID->"3882c9a0-fdd6-4e4f-8140-e2ca88603538"],
+Cell[32330, 852, 455, 9, 73, "Text",ExpressionUUID->"5bb11cce-8b24-4b08-95ea-085fdf77f52e"],
+Cell[32788, 863, 1049, 22, 76, "Text",ExpressionUUID->"62a87f72-a429-4067-9911-fd6f1134e1d7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33874, 890, 263, 4, 67, "Subsection",ExpressionUUID->"43fa1511-b0c3-417f-981a-be9a4d7b7305"],
+Cell[CellGroupData[{
+Cell[34162, 898, 1801, 46, 90, "Input",ExpressionUUID->"06c1af16-2451-4478-8a91-10cbce8e0b89"],
+Cell[35966, 946, 40743, 1232, 1117, "Output",ExpressionUUID->"88f08085-3916-43cc-a454-e54460b430de"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[76758, 2184, 165, 3, 67, "Subsection",ExpressionUUID->"341f5a53-60cb-4aac-b4e3-466c99959815"],
+Cell[CellGroupData[{
+Cell[76948, 2191, 1634, 42, 116, "Input",ExpressionUUID->"e2e2a042-b8b8-4e9b-8f4a-31d420f28a04"],
+Cell[78585, 2235, 33671, 928, 297, "Output",ExpressionUUID->"3eb227a4-cc2c-42ee-8efa-f5dcbb17495b"]
+}, Open  ]],
+Cell[112271, 3166, 1747, 44, 90, "Input",ExpressionUUID->"b048f474-c18f-4da4-8d8a-057436b64df1"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[114067, 3216, 194, 3, 59, "Section",ExpressionUUID->"7e6f3019-3482-48d0-a90d-8f293232a4b2"],
+Cell[114264, 3221, 1232, 27, 165, "Text",ExpressionUUID->"26d94496-1667-48b3-b1b9-aabae1df265a"],
+Cell[115499, 3250, 2521, 72, 246, "Input",ExpressionUUID->"6c291ac3-5c20-4311-b0a1-de36cb7e9461"],
+Cell[118023, 3324, 1652, 38, 41, "Input",ExpressionUUID->"7fd0cb0d-e367-42aa-ae75-8eb52ba27506"],
+Cell[CellGroupData[{
+Cell[119700, 3366, 262, 5, 37, "Input",ExpressionUUID->"80250792-b00a-4ba0-b470-dc2feda3e511"],
+Cell[119965, 3373, 18715, 526, 135, "Output",ExpressionUUID->"7d5ca7b5-6f04-4695-9311-28454be11a37"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[138729, 3905, 222, 3, 59, "Section",ExpressionUUID->"e091c613-7af2-40d7-8320-6a2bd755498a"],
+Cell[CellGroupData[{
+Cell[138976, 3912, 271, 4, 67, "Subsection",ExpressionUUID->"945cea22-0b9b-4250-a111-7f8ebd9bebb0"],
+Cell[139250, 3918, 407, 8, 73, "Text",ExpressionUUID->"9037492e-bf68-4699-89a0-cad5eb895b09"],
+Cell[CellGroupData[{
+Cell[139682, 3930, 493, 11, 37, "Input",ExpressionUUID->"60cb0132-8143-4d50-9c6b-190b9b3abedd"],
+Cell[140178, 3943, 388, 5, 42, "Output",ExpressionUUID->"978f1a21-f45a-44b5-b847-d484ad92fdb4"]
+}, Open  ]],
+Cell[140581, 3951, 371, 7, 44, "Text",ExpressionUUID->"fcc016da-c914-4bed-91d2-0965a8ae958d"],
+Cell[140955, 3960, 238, 4, 37, "Input",ExpressionUUID->"a1cd4973-5ebf-4796-aa14-c7b91b5dfa41"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[141230, 3969, 210, 4, 67, "Subsection",ExpressionUUID->"f9394fc8-8bd2-4049-9b6e-90ee7015ca01"],
+Cell[141443, 3975, 264, 6, 44, "Text",ExpressionUUID->"a17b1445-24fa-4997-918e-b056537af7fc"],
+Cell[CellGroupData[{
+Cell[141732, 3985, 591, 13, 37, "Input",ExpressionUUID->"e2786380-8014-44fa-9ae5-71aa54996cac"],
+Cell[142326, 4000, 8178, 244, 49, "Output",ExpressionUUID->"5ef9eec2-bc74-40f3-ac66-e1b013966aed"]
+}, Open  ]],
+Cell[150519, 4247, 421, 10, 44, "Text",ExpressionUUID->"500fbfde-d652-4d45-bc24-6970cce2589d"],
+Cell[CellGroupData[{
+Cell[150965, 4261, 254, 4, 37, "Input",ExpressionUUID->"2e400f4a-1f49-4622-9d6d-0a589d79d40f"],
+Cell[151222, 4267, 1506, 39, 43, "Output",ExpressionUUID->"43f91a26-eaf5-4304-a2ce-b3e38a8eb5b8"]
+}, Open  ]],
+Cell[152743, 4309, 349, 8, 44, "Text",ExpressionUUID->"347f7a24-f245-438e-8d5d-d47c024e7b2a"],
+Cell[CellGroupData[{
+Cell[153117, 4321, 411, 9, 37, "Input",ExpressionUUID->"259079dd-bbb6-4c68-9a51-eb14997b062e"],
+Cell[153531, 4332, 7032, 227, 49, "Output",ExpressionUUID->"4a3fda19-91ab-4f4e-84ab-c9e0e432a9c1"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[160612, 4565, 256, 4, 67, "Subsection",ExpressionUUID->"0ad00157-05d4-4096-b90f-e3dfb0f58ca0"],
+Cell[160871, 4571, 257, 6, 44, "Text",ExpressionUUID->"04db4f6c-7493-4852-be2c-94abf3d27b23"],
+Cell[CellGroupData[{
+Cell[161153, 4581, 510, 11, 37, "Input",ExpressionUUID->"9f86fd3b-77ce-4722-a2df-3da2a8c29f0e"],
+Cell[161666, 4594, 4661, 136, 49, "Output",ExpressionUUID->"9e615a99-528b-42a0-9810-702598207d45"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[166376, 4736, 249, 4, 67, "Subsection",ExpressionUUID->"cc7b1456-386b-4fef-958f-d6995ca98421"],
+Cell[CellGroupData[{
+Cell[166650, 4744, 1142, 27, 41, "Input",ExpressionUUID->"d006410a-a17f-4f8a-9985-97326780d962"],
+Cell[167795, 4773, 7886, 225, 72, "Output",ExpressionUUID->"d0ad8925-cc9a-439b-829e-1f805065affd"]
+}, Open  ]],
+Cell[175696, 5001, 214, 4, 44, "Text",ExpressionUUID->"497e9b11-76fc-4d49-aae1-046b1a9c88cf"],
+Cell[CellGroupData[{
+Cell[175935, 5009, 544, 12, 41, "Input",ExpressionUUID->"1c8a70c6-d9b4-4dd8-9a30-9059855960cc"],
+Cell[176482, 5023, 1949, 52, 43, "Output",ExpressionUUID->"6c6ab300-bfdf-467e-9479-ade235f090b6"]
+}, Open  ]],
+Cell[178446, 5078, 219, 4, 44, "Text",ExpressionUUID->"e3c4db46-63a9-4cb3-8126-8f627feeac27"],
+Cell[CellGroupData[{
+Cell[178690, 5086, 569, 13, 41, "Input",ExpressionUUID->"adf890e7-d906-4f02-854d-2e160c046b92"],
+Cell[179262, 5101, 5080, 157, 69, "Output",ExpressionUUID->"7941b05b-b3d3-400d-9f2a-bbe570a00d10"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
